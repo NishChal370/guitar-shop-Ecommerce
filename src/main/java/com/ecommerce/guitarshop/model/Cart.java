@@ -1,12 +1,12 @@
 package com.ecommerce.guitarshop.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
@@ -20,22 +20,29 @@ public class Cart {
 
     private int quantity;
 
-    @ManyToMany
-    @JoinTable(
-            name = "cart_products",
-            joinColumns = @JoinColumn(name = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Set<Product> cartProducts;
 
-    @ManyToOne
+
+//    @ManyToMany(mappedBy = "carts", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "carts" , cascade = CascadeType.ALL)
+    private Collection<Product> products = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyerId")
     @JsonBackReference(value = "buyer-cart")
     private Buyer buyer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ordersId")
     @JsonBackReference(value = "cart-orders")
     private Orders orders;
 
 }
+
+//    @ManyToMany(mappedBy = "carts", cascade = CascadeType.ALL)
+//@ManyToMany(cascade = CascadeType.ALL)
+//@JoinTable(
+//        name = "cart_products",
+//        joinColumns = @JoinColumn(name = "cart_id"),
+//        inverseJoinColumns = @JoinColumn(name = "product_id")
+//)
+//@JsonIgnore

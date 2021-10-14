@@ -1,9 +1,7 @@
 package com.ecommerce.guitarshop.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,7 +19,7 @@ public class Payment {
     private String paymentStatus;
     private Date paymentDate;
 
-    @OneToOne(mappedBy = "payment")
+    @OneToOne(mappedBy = "payment", fetch = FetchType.LAZY)
     @JsonManagedReference(value = "orders-payment")
     private Orders orders;
 }

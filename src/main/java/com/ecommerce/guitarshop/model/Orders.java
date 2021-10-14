@@ -2,9 +2,7 @@ package com.ecommerce.guitarshop.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,12 +23,12 @@ public class Orders {
     @JsonManagedReference(value =  "cart-orders")
     private List<Cart> cart;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paymentId")
     @JsonBackReference(value = "orders-payment")
     public Payment payment;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shippingId")
     @JsonBackReference(value = "orders-shipping")
     public Shipping shipping;

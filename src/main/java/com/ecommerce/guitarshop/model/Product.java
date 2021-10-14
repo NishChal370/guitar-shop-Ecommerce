@@ -2,20 +2,19 @@ package com.ecommerce.guitarshop.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Table(name = "product", schema = "guitar_shop")
 public class Product {
     @Id
@@ -35,16 +34,39 @@ public class Product {
     @NotEmpty
     private String productCompany;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "adminId")
     @JsonBackReference(value = "admin-product")
+    @ToString.Exclude
     private Admin admin;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId")
     @JsonBackReference(value = "product-category")
+    @ToString.Exclude
     private Category category;
 
-    @ManyToMany(mappedBy = "cartProducts")
-    private Set<Cart> carts;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "cart_products",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "cart_id")
+    )
+    @JsonIgnore
+    private  Collection<Cart> carts = new ArrayList<>();
+
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "cart_products",
+//            joinColumns = @JoinColumn(name = "product_id"),
+//            inverseJoinColumns = @JoinColumn(name = "cart_id")
+//    )
+//    @JsonIgnore
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    @ToString.Exclude
+//    private Set<Cart> carts = new HashSet<>();
 }
+
+//@ManyToMany(mappedBy = "cartProducts", cascade = CascadeType.ALL)
+
