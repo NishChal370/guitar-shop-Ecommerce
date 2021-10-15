@@ -1,12 +1,11 @@
 package com.ecommerce.guitarshop.service;
 
-import com.ecommerce.guitarshop.dao.OrdersRepository;
 import com.ecommerce.guitarshop.model.Orders;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
+import com.ecommerce.guitarshop.dao.OrdersRepository;
 import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class OrdersService {

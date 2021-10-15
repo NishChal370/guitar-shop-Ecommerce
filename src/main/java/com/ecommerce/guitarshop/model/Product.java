@@ -1,14 +1,11 @@
 package com.ecommerce.guitarshop.model;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Data
 @Entity

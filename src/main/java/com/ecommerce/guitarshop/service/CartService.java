@@ -1,14 +1,13 @@
 package com.ecommerce.guitarshop.service;
 
-import com.ecommerce.guitarshop.dao.CartRepository;
 import com.ecommerce.guitarshop.model.Cart;
 import com.ecommerce.guitarshop.model.Product;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
+import com.ecommerce.guitarshop.dao.CartRepository;
 import java.util.*;
 import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class CartService {
@@ -53,7 +52,7 @@ public class CartService {
         return cartRepository.save(existingCart);
     }
 
-    public String  updateCartById(long id, Product product){
+    public String  updateCartProductById(long id, Product product){
 
         Cart existingCart = getById(id);
         Cart newCart = new Cart();

@@ -1,12 +1,11 @@
 package com.ecommerce.guitarshop.service;
 
-import com.ecommerce.guitarshop.dao.AdminRepository;
 import com.ecommerce.guitarshop.model.Admin;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
+import com.ecommerce.guitarshop.dao.AdminRepository;
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class AdminService {

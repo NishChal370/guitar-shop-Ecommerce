@@ -1,10 +1,9 @@
 package com.ecommerce.guitarshop.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-
-import javax.persistence.*;
 import java.util.Date;
+import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Data

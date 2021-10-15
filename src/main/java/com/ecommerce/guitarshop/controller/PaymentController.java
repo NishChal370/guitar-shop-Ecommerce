@@ -1,13 +1,12 @@
 package com.ecommerce.guitarshop.controller;
 
+import java.util.List;
 import com.ecommerce.guitarshop.model.Payment;
 import com.ecommerce.guitarshop.service.PaymentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 public class PaymentController {
@@ -18,6 +17,7 @@ public class PaymentController {
     private List<Payment> getAll(){
         return service.getAll();
     }
+
     @GetMapping("/paymentById/{id}")
     private Payment getById(@PathVariable Long id){
         return service.getById(id);

@@ -2,10 +2,9 @@ package com.ecommerce.guitarshop.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Entity
 @Data

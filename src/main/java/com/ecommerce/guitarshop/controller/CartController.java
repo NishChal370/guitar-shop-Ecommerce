@@ -1,15 +1,13 @@
 package com.ecommerce.guitarshop.controller;
 
+import java.util.List;
 import com.ecommerce.guitarshop.model.Cart;
 import com.ecommerce.guitarshop.model.Product;
 import com.ecommerce.guitarshop.service.CartService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 public class CartController {
@@ -28,7 +26,6 @@ public class CartController {
 
     @PostMapping("/saveCart")
     public ResponseEntity<Cart> setCart(@RequestBody Cart cart){
-        System.out.println("-> "+cart);
         return new ResponseEntity<Cart>(
                 service.save(cart), HttpStatus.CREATED);
     }
@@ -39,10 +36,10 @@ public class CartController {
                 service.updateCart(id, cart), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/updateProductssById/{id}")
-    public String updateProductsById(@PathVariable Long id, @RequestBody Product product){
+    @PatchMapping("/updateCartProductsById/{id}")
+    public String updateCartProductsById(@PathVariable Long id, @RequestBody Product product){
         System.out.println("IN side");
-        return service.updateCartById(id, product);
+        return service.updateCartProductById(id, product);
     }
 
     @DeleteMapping("/deleteCartById/{id}")

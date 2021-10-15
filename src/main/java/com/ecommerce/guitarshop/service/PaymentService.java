@@ -1,12 +1,11 @@
 package com.ecommerce.guitarshop.service;
 
-import com.ecommerce.guitarshop.dao.PaymentRepository;
 import com.ecommerce.guitarshop.model.Payment;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
+import com.ecommerce.guitarshop.dao.PaymentRepository;
 import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class PaymentService {

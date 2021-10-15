@@ -1,13 +1,12 @@
 package com.ecommerce.guitarshop.controller;
 
+import java.util.List;
 import com.ecommerce.guitarshop.model.Admin;
 import com.ecommerce.guitarshop.service.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 public class AdminController {

@@ -1,13 +1,12 @@
 package com.ecommerce.guitarshop.controller;
 
+import java.util.List;
 import com.ecommerce.guitarshop.model.Category;
 import com.ecommerce.guitarshop.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 public class CategoryController {
@@ -18,6 +17,7 @@ public class CategoryController {
     private List<Category> getAll(){
         return service.getAll();
     }
+
     @GetMapping("/categoryById/{id}")
     private Category getById(@PathVariable Long id){
         return service.getById(id);

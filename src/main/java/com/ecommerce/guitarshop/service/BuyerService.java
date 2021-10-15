@@ -2,11 +2,10 @@ package com.ecommerce.guitarshop.service;
 
 import com.ecommerce.guitarshop.dao.BuyerRepository;
 import com.ecommerce.guitarshop.model.Buyer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import javax.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class BuyerService {
