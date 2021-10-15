@@ -18,7 +18,6 @@ public class PaymentService {
     }
 
     public Payment getById(long id){
-        System.out.println("GEt by id-<><><><><><><><><><><><><><><<<><><><<<><><><><");
         return paymentRepository.findById(id).orElseThrow(EntityNotFoundException::new) ;
     }
 

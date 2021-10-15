@@ -14,7 +14,7 @@ import java.util.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+//@ToString
 @Table(name = "product", schema = "guitar_shop")
 public class Product {
     @Id
@@ -30,6 +30,8 @@ public class Product {
     @NotEmpty
     private double price;
     @NotEmpty
+    private int productQuantity;
+    @NotEmpty
     private String image;
     @NotEmpty
     private String productCompany;
@@ -37,13 +39,11 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "adminId")
     @JsonBackReference(value = "admin-product")
-    @ToString.Exclude
     private Admin admin;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryId")
     @JsonBackReference(value = "product-category")
-    @ToString.Exclude
     private Category category;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -54,19 +54,5 @@ public class Product {
     @JsonIgnore
     private  Collection<Cart> carts = new ArrayList<>();
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "cart_products",
-//            joinColumns = @JoinColumn(name = "product_id"),
-//            inverseJoinColumns = @JoinColumn(name = "cart_id")
-//    )
-//    @JsonIgnore
-
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    @ToString.Exclude
-//    private Set<Cart> carts = new HashSet<>();
 }
-
-//@ManyToMany(mappedBy = "cartProducts", cascade = CascadeType.ALL)
 

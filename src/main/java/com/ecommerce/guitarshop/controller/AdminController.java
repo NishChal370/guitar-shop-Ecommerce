@@ -27,7 +27,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/deleteAdmin/{id}")
-    public String deleteAdmin(@PathVariable Integer id){
+    public String deleteAdmin(@PathVariable Long id){
         return service.deleteAdminById(id);
     }
 

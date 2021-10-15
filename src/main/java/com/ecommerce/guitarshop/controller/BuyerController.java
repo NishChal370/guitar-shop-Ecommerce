@@ -18,6 +18,7 @@ public class BuyerController {
     private List<Buyer> getAll(){
         return service.getAll();
     }
+
     @GetMapping("/buyerById/{id}")
     private Buyer getById(@PathVariable Long id){
         return service.getById(id);
@@ -36,7 +37,7 @@ public class BuyerController {
     }
 
     @DeleteMapping("/deleteBuyerById/{id}")
-    public String deleteBuyer(@PathVariable Integer id){
+    public String deleteBuyer(@PathVariable Long id){
         return service.deleteById(id);
     }
 

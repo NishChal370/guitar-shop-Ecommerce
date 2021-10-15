@@ -1,24 +1,16 @@
 package com.ecommerce.guitarshop.service;
 
 import com.ecommerce.guitarshop.dao.CartRepository;
-import com.ecommerce.guitarshop.dao.PaymentRepository;
 import com.ecommerce.guitarshop.model.Cart;
 import com.ecommerce.guitarshop.model.Product;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
-import java.util.stream.Stream;
 
 @Service
-@ToString
 public class CartService {
 
     @Autowired
@@ -28,78 +20,22 @@ public class CartService {
     ProductService productService;
 
     public Cart save(Cart cart){
+        int quantity = 1;
+        Cart newCart = new Cart();
+        newCart.setQuantity(cart.getQuantity());
+        newCart.setBuyer(cart.getBuyer());
+        newCart.setOrders(cart.getOrders());
+        newCart.getProducts().addAll(
+                cart.getProducts()
+                        .stream()
+                        .map(p->{
+                            Product pp = productService.getById(p.getProductId());
+                            pp.getCarts().add(newCart);
+                            return pp;
+                        }).collect(Collectors.toList())
+        );
 
-//        Cart newCart = new Cart();
-//        newCart.setQuantity(cart.getQuantity());
-//        newCart.setBuyer(cart.getBuyer());
-//        newCart.setOrders(cart.getOrders());
-//        newCart.getProducts().addAll(
-//                cart.getProducts()
-//                        .stream()
-//                        .map(p->{
-//                            Product pp = productService.getById(p.getProductId());
-//                            pp.getCarts().add(newCart);
-//                            return pp;
-//                        }).collect(Collectors.toList()));
-//        return cartRepository.save(newCart);
-//        System.out.println("-->> "+cart);
-//        List<Long> a = cart.getProducts().stream().map(Product::getProductId).collect(Collectors.toList());
-//        System.out.println(a);
-//        Long productIndex = null;
-//        Set<Product> proSet = new HashSet<>();
-
-//        System.out.println(cart.getProducts().);
-//        for (long i:a) {
-//            System.out.println("INDEXXX "+i);
-//            productIndex = i;
-//            proSet.add(productService.getById(productIndex));
-////            System.out.println(i);
-////            pp = productService.getById(i);
-//        }
-//        System.out.println("Index "+ productIndex);
-//         Product pp =productService.getById(productIndex);
-
-////        System.out.println("CROSSERS-<<><><><><><>"+proSet);
-//        System.out.println(cart.getBuyer());
-//        System.out.println(cart.getOrders());
-
-//        System.out.println( productService.getById(1) );
-//        }
-//        System.out.println("=>>> "+cart.getBuyer().getBuyerId());
-//        System.out.println("-> "+productService.getById(1));
-//        Cart newCart = new Cart();
-//        System.out.println("--->>>>>1 "+cart);
-//        System.out.println(cart.getProducts().stream().map(Product::getProductId).toString());
-
-//        newCart.setCartId((cart.getCartId()));
-//        System.out.println("--->>>>> 2"+cart.getCartId());
-//        newCart.setBuyer(cart.getBuyer());
-//        System.out.println("--->>>>> 3"+cart.getBuyer());
-//        newCart.setOrders(cart.getOrders());
-//        System.out.println("--->>>>> 4"+cart.getOrders());
-//        newCart.setQuantity(cart.getQuantity());
-//        System.out.println("--->>>>> 5"+cart.getQuantity());
-
-//        newCart.setProducts(cart.getProducts().stream().map(e->productService.getById(e.getProductId())).collect(Collectors.toSet()));
-//        System.out.println("=>>> "+cart.getCartProducts());
-//        Collection<Product> p = cart.getCartProducts();
-//        System.out.println(p.stream().map(e-> (e.getDetail()).toString()).reduce("", String::concat));
-//        LongStream pId = p.stream().mapToLong(e-> e.getProductId());
-
-//        Cart newCart = new Cart();
-//        newCart.setCartId((cart.getCartId()));
-//        newCart.setQuantity(cart.getQuantity());
-//        newCart.setBuyer(cart.getBuyer());
-//        newCart.setOrders(cart.getOrders());
-//        newCart.setProducts(proSet);
-//        System.out.println(newCart);
-//        System.out.println(newCart);
-////        return customerRepository.save(newCustomer);
-//        return cartRepository.save(newCart);
-//        productService.
-//        System.out.println("--->>>>> 6"+newCart);
-//        return null;
-        return null;
+        return cartRepository.save(newCart);
     }
 
     public Cart getById(long id){
@@ -115,6 +51,30 @@ public class CartService {
         existingCart.setQuantity(updatedCart.getQuantity());
 
         return cartRepository.save(existingCart);
+    }
+
+    public String  updateCartById(long id, Product product){
+
+        Cart existingCart = getById(id);
+        Cart newCart = new Cart();
+        Collection<Product> newProducts = new ArrayList<>();
+
+        newCart.setQuantity(existingCart.getQuantity());
+        newCart.setBuyer(existingCart.getBuyer());
+        newCart.setOrders(existingCart.getOrders());
+        newProducts.add(product);
+        existingCart.getProducts().addAll(
+                newProducts
+                .stream()
+                .map(p->{
+                    Product pp = productService.getById(p.getProductId());
+                    pp.getCarts().add(existingCart);
+                    return pp;
+                }).collect(Collectors.toList()));
+
+        cartRepository.save(existingCart);
+
+        return "Cart ID: "+id+" Updated and added new product";
     }
 
     public String deleteById(long id){

@@ -36,7 +36,7 @@ public class ShippingController {
     }
 
     @DeleteMapping("/deleteShippingById/{id}")
-    public String deleteShipping(@PathVariable Integer id){
+    public String deleteShipping(@PathVariable Long id){
         return service.deleteById(id);
     }
 

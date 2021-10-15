@@ -26,7 +26,7 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(EntityNotFoundException::new) ;
     }
 
-    public List<Product> getAll(){
+    public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
 
@@ -40,6 +40,12 @@ public class ProductService {
         existingProduct.setProductCompany(updatedProduct.getProductCompany());
 
         return productRepository.save(existingProduct);
+    }
+
+    public String updateById(long id, int productQuantity){
+        productRepository.updateProductById(id, productQuantity);
+
+        return "Product id:  "+id+" updated";
     }
 
     public String deleteById(long id){

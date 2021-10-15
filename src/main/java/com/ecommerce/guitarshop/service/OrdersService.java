@@ -1,8 +1,6 @@
 package com.ecommerce.guitarshop.service;
 
-import com.ecommerce.guitarshop.dao.CategoryRepository;
 import com.ecommerce.guitarshop.dao.OrdersRepository;
-import com.ecommerce.guitarshop.model.Category;
 import com.ecommerce.guitarshop.model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

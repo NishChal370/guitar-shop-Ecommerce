@@ -20,9 +20,6 @@ public class Cart {
 
     private int quantity;
 
-
-
-//    @ManyToMany(mappedBy = "carts", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToMany(mappedBy = "carts" , cascade = CascadeType.ALL)
     private Collection<Product> products = new ArrayList<>();
 
@@ -37,12 +34,3 @@ public class Cart {
     private Orders orders;
 
 }
-
-//    @ManyToMany(mappedBy = "carts", cascade = CascadeType.ALL)
-//@ManyToMany(cascade = CascadeType.ALL)
-//@JoinTable(
-//        name = "cart_products",
-//        joinColumns = @JoinColumn(name = "cart_id"),
-//        inverseJoinColumns = @JoinColumn(name = "product_id")
-//)
-//@JsonIgnore

@@ -1,12 +1,10 @@
 package com.ecommerce.guitarshop.controller;
-
 import com.ecommerce.guitarshop.model.Product;
 import com.ecommerce.guitarshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -14,9 +12,9 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-    @GetMapping("/product")
-    private List<Product> getAll(){
-        return service.getAll();
+    @GetMapping("/getAllProducts")
+    private List<Product> getAllProducts(){
+        return service.getAllProducts();
     }
 
     @GetMapping("/productById/{id}")
@@ -37,14 +35,13 @@ public class ProductController {
                 service.saveAll(products), HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateProduct/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product){
-        return new ResponseEntity<Product>(
-                service.updateProduct(id, product), HttpStatus.CREATED);
+    @PatchMapping("/updateProductQuantityById/{id}&{quantity}")
+    public String updateProductQuantityById(@PathVariable long id, @PathVariable int quantity){
+        return service.updateById(id, quantity);
     }
 
     @DeleteMapping("/deleteProductById/{id}")
-    public String deleteProduct(@PathVariable Integer id){
+    public String deleteProduct(@PathVariable Long id){
         return service.deleteById(id);
     }
 
