@@ -1,6 +1,7 @@
 package com.ecommerce.guitarshop.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import java.util.*;
 import javax.persistence.*;
@@ -25,9 +26,8 @@ public class Cart {
     @JsonBackReference(value = "buyer-cart")
     private Buyer buyer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ordersId")
-    @JsonBackReference(value = "cart-orders")
-    private Orders orders;
-
+    @OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "orders-cart")
+    private Orders order;
 }
+

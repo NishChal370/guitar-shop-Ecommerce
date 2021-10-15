@@ -23,7 +23,7 @@ public class CartService {
         Cart newCart = new Cart();
         newCart.setQuantity(cart.getQuantity());
         newCart.setBuyer(cart.getBuyer());
-        newCart.setOrders(cart.getOrders());
+        newCart.setOrder(cart.getOrder());
         newCart.getProducts().addAll(
                 cart.getProducts()
                         .stream()
@@ -37,10 +37,32 @@ public class CartService {
         return cartRepository.save(newCart);
     }
 
+    public String  updateCartProductById(long id, Product product){
+
+        Cart existingCart = getById(id);
+        Cart newCart = new Cart();
+        Collection<Product> newProducts = new ArrayList<>();
+
+        newCart.setQuantity(existingCart.getQuantity());
+        newCart.setBuyer(existingCart.getBuyer());
+        newCart.setOrder(existingCart.getOrder());
+        newProducts.add(product);
+        existingCart.getProducts().addAll(
+                newProducts
+                        .stream()
+                        .map(p->{
+                            Product pp = productService.getById(p.getProductId());
+                            pp.getCarts().add(existingCart);
+                            return pp;
+                        }).collect(Collectors.toList()));
+
+        cartRepository.save(existingCart);
+
+        return "Cart ID: "+id+" Updated and added new product";
+    }
     public Cart getById(long id){
         return cartRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
-
     public List<Cart> getAll(){
         return cartRepository.findAll();
     }
@@ -52,29 +74,7 @@ public class CartService {
         return cartRepository.save(existingCart);
     }
 
-    public String  updateCartProductById(long id, Product product){
 
-        Cart existingCart = getById(id);
-        Cart newCart = new Cart();
-        Collection<Product> newProducts = new ArrayList<>();
-
-        newCart.setQuantity(existingCart.getQuantity());
-        newCart.setBuyer(existingCart.getBuyer());
-        newCart.setOrders(existingCart.getOrders());
-        newProducts.add(product);
-        existingCart.getProducts().addAll(
-                newProducts
-                .stream()
-                .map(p->{
-                    Product pp = productService.getById(p.getProductId());
-                    pp.getCarts().add(existingCart);
-                    return pp;
-                }).collect(Collectors.toList()));
-
-        cartRepository.save(existingCart);
-
-        return "Cart ID: "+id+" Updated and added new product";
-    }
 
     public String deleteById(long id){
         cartRepository.deleteById(id);

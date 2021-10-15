@@ -18,9 +18,7 @@ public class Orders {
 
     private double totalPrice;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orders",  fetch = FetchType.LAZY)
-    @JsonManagedReference(value =  "cart-orders")
-    private List<Cart> cart;
+
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paymentId")
@@ -31,5 +29,13 @@ public class Orders {
     @JoinColumn(name = "shippingId")
     @JsonBackReference(value = "orders-shipping")
     public Shipping shipping;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cartId")
+    @JsonBackReference(value = "orders-cart")
+    public Cart cart;
 }
 
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orders",  fetch = FetchType.LAZY)
+//    @JsonManagedReference(value =  "cart-orders")
+//    private List<Cart> cart;
