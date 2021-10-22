@@ -1,15 +1,16 @@
 import React from 'react'
-import Carousel from './Carousel'
-import './Home.css'
 import { useSelector } from 'react-redux';
-import FeaturedProducts from './FeaturedProducts';
-import SampleProduct from './SampleProduct';
+
+import './Home.css'
+import Carousel from './Carousel'
 import Testimonial from './Testimonial';
+import SampleProduct from './SampleProduct';
+import FeaturedProducts from './FeaturedProducts';
+
 
 function Home() {
     const categoryProductState = useSelector(state => state.categoryReducer.data);
 
-    console.log((categoryProductState !== undefined) && categoryProductState.categoryName);
     return (
         <div>
             <Carousel/>
@@ -44,12 +45,8 @@ function Home() {
                 ?<> <SampleProduct/>
                     <FeaturedProducts/>
                     <Testimonial/>
-                    <p>HOME</p>
-                    <p>HOME</p>
-                    <p>HOME</p>
-
                 </>
-                : "Loading"
+                : "Loading..."
             }
             
         </div>

@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+
 import './App.css';
+import Admin from './components/admin/Index';
 import MainFrame from './components/MainFrame';
 import { setCategory, setProduct } from './redux/Action';
 
@@ -9,18 +12,15 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const fetchCategoryData=(productLimit)=>{
+  const fetchCategoryData=()=>{
     // Make a request for a user with a given ID
     axios.get(`http://localhost:3037/category`)
       .then((response) => {
         // handle success
         if(response.status.toString() === '200'){
-          let cateogaryResponse = response.data.map((data, i)=>{
-            return {categoryId: data.categoryId, categoryName: data.categoryName, products: data.products.slice(0,productLimit)}
+          let cateogaryResponse = response.data.map((data)=>{
+            return {categoryId: data.categoryId, categoryName: data.categoryName, products: data.products}
           });
-          // console.log("=============");
-          // console.log(cateogaryResponse);
-          // console.log("=============");
           dispatch(setCategory(cateogaryResponse));
         }
       })
@@ -31,14 +31,13 @@ function App() {
 
   }
 
-  const fetchProductData=(productLimit)=>{
+  const fetchProductData=()=>{
     // Make a request for a user with a given ID
     axios.get(`http://localhost:3037/getAllProducts`)
       .then((response) => {
         // handle success
         if(response.status.toString() === '200'){
-          console.log(response.data.slice(0,productLimit))
-          dispatch(setProduct(response.data.slice(0,productLimit)));
+          dispatch(setProduct(response.data));
         }
       })
       .catch(function (error) {
@@ -49,14 +48,19 @@ function App() {
   }
 
   useEffect(()=>{
-    fetchCategoryData(4);
-    fetchProductData(5);
-
+    fetchCategoryData();
+    fetchProductData();
   },[])
   
   return (
   <div className="App">
-    <MainFrame/>
+    
+      <Router>
+        <Switch>
+          <Route path="/admin" component={Admin} />
+          <Route path="/" component={MainFrame} />
+        </Switch>
+      </Router>
   </div>
 
   );

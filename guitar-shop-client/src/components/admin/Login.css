@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+.adminlogin__container{
+    /* position: relative; */
+    /* background-color: blue; */
+    height: fit-content;
+    margin-top: 6rem;
+    width: 30%;
+    text-align: left;
+    /* padding: 2rem;
+    text-align: left;
+    width: 40%;
+    margin-left: 30%;
+    top:10rem; */
+    /* justify-items: right; */
+    /* box-shadow: 1px 10px 100px 10px #888888; */
+}
+.login__container h3{
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: 'Rampart One', cursive;
+}
+.adminlogin__container input{
+    border: none;
+    background-color: rgb(247,247,247);
+    border-bottom: 2px solid black;
+    /* margin-top: 1rem; */
+}
+.form-group{
+    margin-top: 2rem;
+}
+
+.message__container{
+    text-align: center;
+    font-family: 'Rampart One', cursive;
+    font-size: 1.6rem;
+}
+
+.adminlogin__container input:hover{
+    border: none;
+    background-color: rgb(247,247,247);
+    border-bottom: 2px solid black;
+}
+
+.input__container{
+    margin-top: 2rem;
+}
+
+.login__container{
+    display: flex;
+    gap: 5rem;
+    background-color: rgb(247,247,247);
+    height: 100%;
+    padding: 4rem 6rem;
+}
+
+.login__container img{
+    background-color: blueviolet;
+    width: 100%;
+}
+
+.login__container figure{
+    background-color: cadetblue;
+    width: 50rem;
+    height: fit-content;
+}

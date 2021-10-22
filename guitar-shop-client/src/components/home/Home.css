@@ -1,3 +1,7 @@
+:root {
+    --border-color: rgb(180, 175, 175);
+}
+
 .item{
     background-repeat: no-repeat;
     background-size:cover;
@@ -17,28 +21,33 @@
     padding : 0;
 }
 
-.product__container--card{
-    display: flex;
-    justify-content: space-around;
-   
-}
-.products__container{
-    align-self: center;
-}
-
-.product__card-figure{
-    width: 18rem;
-    /* background-color: gray; */
-}
-.card-img-top{
-    background-color: greenyellow;
-    height: 20rem;
-    overflow: hidden;
-}
 
 .container--top-margin{
     margin-top: 4rem;
 }
+
+.sample-scroll__button{
+    display: flex;
+    gap: 0.6rem;
+    justify-content: right;
+    margin: 1rem 3rem;
+}
+
+.sample-scroll__button input{
+    width: 0.8rem;
+    height: 0.8rem;
+    cursor: pointer;
+}
+/* style={{display:"flex", gap:"0.6rem", justifyContent:"center", margin:"1rem 3rem"}} */
+.sample-scroll__button--featured{
+    justify-content: center;
+}
+/* style={{ width: "1.6em", height: "1.6em" }} */
+.sample-scroll__button--featured input{
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
 .featured__container{
     background-color: #E0E2E3;
     padding-top: 10rem;
@@ -48,18 +57,39 @@
 .featured__container-product{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    /* margin: 10rem; */
     gap: 2rem;
-    margin: 0rem 4rem 0rem 5rem;
+    place-items: center;
 }
 
 .testimonial__container{
     padding: 6rem 2rem;
 }
 
+.testimonial__author{
+    text-align: left;
+    margin-left: 1rem;
+}
+
 blockquote{
     background-color: #0088CC;
     border-radius: 10px;
-    padding: 6px 20px;
+    padding: 20px;
     color: white;
+}
+
+.products__container section{
+    text-align: left;
+    display: flex;
+    margin-left: 4rem;
+    justify-content: space-between;
+}
+
+.product__container--card{
+    display: flex;
+    justify-content: space-around;
+   
+}
+
+.ads-img img{
+    width: 100%;
 }

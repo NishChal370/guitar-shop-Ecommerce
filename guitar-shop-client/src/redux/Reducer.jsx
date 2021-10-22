@@ -1,9 +1,10 @@
 import { combineReducers } from "redux"
-import { SET_CATEGORY, SET_PRODUCT } from "./Action"
+import { SET_CATEGORY, SET_PRODUCT, SET_ADMIN } from "./Action"
 
 const initialCategoryState={
     categoryData:[],
-    productData:[]
+    productData:[],
+    adminData:[],
 }
 
 const categoryReducer=(state=initialCategoryState.categoryData , action)=>{
@@ -11,7 +12,7 @@ const categoryReducer=(state=initialCategoryState.categoryData , action)=>{
         case SET_CATEGORY:
             return{
                 ...state,
-                data : action.payload
+                data : [...action.payload]
             }
     
         default:
@@ -33,6 +34,19 @@ const productReducer=(state=initialCategoryState.productData , action)=>{
 }
 
 
-const rootReducer =  combineReducers({categoryReducer, productReducer})
+const adminReducer=(state=initialCategoryState.adminData , action)=>{
+    switch (action.type) {
+        case SET_ADMIN:
+            return{
+                ...state,
+                data : action.payload
+            }
+    
+        default:
+            return state
+    }
+}
+
+const rootReducer =  combineReducers({categoryReducer, productReducer, adminReducer})
 
 export default rootReducer

@@ -1,0 +1,78 @@
+.card{
+    width: 18rem;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.card-img-top{
+    position: relative;
+    /* border: 2px solid var(--border-color); */
+    height: 16rem;
+    overflow: hidden;
+    object-fit: contain;
+    background-color: white;
+}
+
+
+.card__caption{
+    position: absolute;
+    top: 0rem;
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.card__edit--button{
+    text-align: right;
+    padding: 0rem 1.2rem 0rem 0rem;
+    color: white;
+    background-color: #474747;
+}
+.card__edit--button p{
+    /* text-align: right; */
+    /* width: fit-content; */
+    background-color: blueviolet;
+}
+
+.card__overview{
+    background-color: #474747;
+    color: white;
+    padding: 0.6rem 0rem 0.6rem 0rem;
+    margin-top: 60%;
+}
+
+.overview--height{
+    margin-top: 70%;
+}
+
+.card:hover .card__caption{
+    visibility: visible;
+    cursor: pointer;
+}
+
+.cart__icons{
+    font-size: 2rem;
+    display: flex;
+    gap: 2rem;
+    margin-left: 1rem;
+}
+
+
+/* .product-quantity__continer{
+    display: flex;
+    gap: 1rem;
+}
+.product-quantity__continer span{
+    display: flex;
+    gap: 1rem;
+    
+} */
+
+.quantity__button{
+    background-color: rgb(199, 198, 198);
+    border-radius: 6px;
+    margin-bottom: 4rem;
+
+}
+

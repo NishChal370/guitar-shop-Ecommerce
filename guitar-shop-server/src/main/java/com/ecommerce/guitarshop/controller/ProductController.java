@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -33,6 +34,8 @@ public class ProductController {
 
     @PostMapping("/saveProducts")
     public ResponseEntity<List<Product>> setProducts(@RequestBody List<Product> products){
+        System.out.println("frist");
+        System.out.println(products);
         return new ResponseEntity<List<Product>>(
                 service.saveAll(products), HttpStatus.CREATED);
     }

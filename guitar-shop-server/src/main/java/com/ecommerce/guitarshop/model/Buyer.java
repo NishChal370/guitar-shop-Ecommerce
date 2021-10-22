@@ -33,6 +33,9 @@ public class Buyer {
     @Size(max = 8)
     private String buyerPassword;
 
+    @NotEmpty
+    private Boolean status;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer",  fetch = FetchType.LAZY)
     @JsonManagedReference(value =  "buyer-cart")
     private List<Cart> carts;

@@ -1,11 +1,14 @@
 package com.ecommerce.guitarshop.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
 
 @Data
 @Entity
@@ -47,14 +50,20 @@ public class Product {
     @JoinColumn(name = "categoryId")
     @JsonBackReference(value = "product-category")
     private Category category;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "cart_products",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "cart_id")
-    )
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+//    @JsonManagedReference(value =  "product-cartProduct")
     @JsonIgnore
-    private  Collection<Cart> carts = new ArrayList<>();
+    private  Collection<CartProduct> cartProducts = new ArrayList<>();
+//---------
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "cart_products",
+//            joinColumns = @JoinColumn(name = "product_id"),
+//            inverseJoinColumns = @JoinColumn(name = "cart_id")
+//    )
+//    @JsonIgnore
+//    private  Collection<Cart> carts = new ArrayList<>();
+
+//---------
 
 }
 

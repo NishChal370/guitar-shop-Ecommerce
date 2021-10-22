@@ -1,63 +1,70 @@
 import React from 'react'
-import './NavBar.css'
-import { MdOutlineShoppingBag } from "react-icons/md";
-import { GiLoveHowl } from "react-icons/gi";
-import { useSelector } from 'react-redux';
 
-function NavBar() {
+import './NavBar.css'
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { GiLoveHowl } from "react-icons/gi";
+import { MdOutlineShoppingBag } from "react-icons/md";
+
+function NavBar({calledFrom}) {
+    let history = useHistory();
     const categoryState = useSelector(state => state.categoryReducer.data);
-    
+
     return (
         <nav className="navbar  fixed-top navbar-light bg-light">
             <div className="container-fluid">
-                <figure>
-                    <a className="navbar-brand" href="#">
-                        <img src="https://www.musicplanet.co.nz/media/logo/websites/1/logo.png" alt="company logo" width="80%" height="24%" className="d-inline-block "/>
-                    </a>
+                <figure className="navbar-brand" onClick={()=> history.push("/")}>
+                    <img src="https://www.musicplanet.co.nz/media/logo/websites/1/logo.png" alt="company logo" width="80%" height="24%" className="d-inline-block "/>
                 </figure>
-                <div>
-                    <section>
-                        <ul className="nav justify-content-end">
-                            <li className="nav-item">
-                                <a className="nav-link nav-link--top-margin" href="#">STORE LOCATION</a>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle nav-link--top-margin" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">MY ACCOUNT</a>
-                                <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item " href="#scrollspyHeading3">LOG IN</a></li>
-                                    <li><a className="dropdown-item" href="#scrollspyHeading4">CREATE ACCOUNT</a></li>
-                                </ul>
-                            </li>
-                            {[<GiLoveHowl/>, <MdOutlineShoppingBag/>].map((value,index)=>{
-                                return(
-                                    <li key={`productNav+${index}`}className="nav-item">
-                                        <a className="nav-link nav-logo--size" href="#">{value}</a>
+
+                {
+                (calledFrom !== "admin") // will only show when called fro user
+                    &&  <div>
+                            <section>
+                                <ul className="nav justify-content-end">
+                                    <li className="nav-item">
+                                        <p className="nav-link nav-link--top-margin">STORE LOCATION</p>
                                     </li>
-                                )
-                            })}
-                        </ul>
-                    </section>
-                    <section>
-                        <ul className="nav justify-content-end">
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">HOME</a>
-                            </li>
-                            {(categoryState !== undefined) && categoryState.map((value, index)=>{
-                                return(
-                                    <li key={`navCateog ${index}`} className="nav-item dropdown">
-                                        <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{value.categoryName.toUpperCase()}</a>
+                                    <li className="nav-item dropdown">
+                                        <p className="nav-link dropdown-toggle nav-link--top-margin" data-bs-toggle="dropdown"  role="button" aria-expanded="false">MY ACCOUNT</p>
                                         <ul className="dropdown-menu">
-                                            <li><a className="dropdown-item" href="#scrollspyHeading3">Third</a></li>
-                                            <li><a className="dropdown-item" href="#scrollspyHeading4">Fourth</a></li>
-                                            <li><hr className="dropdown-divider"/></li>
-                                            <li><a className="dropdown-item" href="#scrollspyHeading5">Fifth</a></li>
+                                            <li><p className="dropdown-item ">LOG IN</p></li>
+                                            <li><p className="dropdown-item" >CREATE ACCOUNT</p></li>
                                         </ul>
                                     </li>
-                                )
-                            })}
-                        </ul>
-                    </section>
-                </div>
+                                    {[<GiLoveHowl/>, <MdOutlineShoppingBag/>].map((value,index)=>{
+                                        return(
+                                            <li key={`productNav${index}`}className="nav-item">
+                                                <p className="nav-link nav-logo--size" >{value}</p>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </section>
+                            <section>
+                                <ul className="nav justify-content-end">
+                                    <li className="nav-item">
+                                        <a className="nav-link active" aria-current="page" onClick={()=> history.push("/")}>HOME</a>
+                                    </li>
+                                    
+                                    {(categoryState !== undefined) && categoryState.map((value, index)=>{
+                                        return(
+                                            <li key={`navCateog ${index}`} className="nav-item dropdown">
+                                                <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" onClick={()=>history.push("/products")} role="button" aria-expanded="false">{(value.categoryName !== null) && value.categoryName.toUpperCase()}</a>
+                                                <ul className="dropdown-menu">
+                                                    <li><p className="dropdown-item" href="...">Third</p></li>
+                                                    <li><p className="dropdown-item" href="...">Fourth</p></li>
+                                                    <li><hr className="dropdown-divider"/></li>
+                                                    <li><p className="dropdown-item" href="...">Fifth</p></li>
+                                                </ul>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </section>
+                        </div>
+                }
+                
             </div>            
         </nav>
     )

@@ -1,6 +1,9 @@
 package com.ecommerce.guitarshop.service;
 
+import com.ecommerce.guitarshop.dao.CartProductRepository;
 import com.ecommerce.guitarshop.model.Cart;
+import com.ecommerce.guitarshop.model.CartProduct;
+import com.ecommerce.guitarshop.model.CartProductId;
 import com.ecommerce.guitarshop.model.Product;
 import com.ecommerce.guitarshop.dao.CartRepository;
 import java.util.*;
@@ -16,45 +19,56 @@ public class CartService {
     CartRepository cartRepository;
 
     @Autowired
+    CartProductRepository cartProductRepository;
+
+    @Autowired
     ProductService productService;
 
     public Cart save(Cart cart){
-        int quantity = 1;
-        Cart newCart = new Cart();
-        newCart.setQuantity(cart.getQuantity());
-        newCart.setBuyer(cart.getBuyer());
-        newCart.setOrder(cart.getOrder());
-        newCart.getProducts().addAll(
-                cart.getProducts()
-                        .stream()
-                        .map(p->{
-                            Product pp = productService.getById(p.getProductId());
-                            pp.getCarts().add(newCart);
-                            return pp;
-                        }).collect(Collectors.toList())
-        );
 
+        Cart newCart = new Cart();
+        newCart.setOrder(cart.getOrder());
+        newCart.setBuyer(cart.getBuyer());
+
+        newCart.getCartProducts().addAll((cart.getCartProducts()
+                .stream()
+                .map(cp -> {
+                    System.out.println(cp);
+                    Product pp = productService.getById(cp.getProduct().getProductId());
+                    CartProduct newCartProduct = new CartProduct();
+                    newCartProduct.setProduct(pp);
+                    newCartProduct.setCart(newCart);
+                    newCartProduct.setQuantity(cp.getQuantity());
+
+                    return newCartProduct;
+                }).collect(Collectors.toList())
+        ));
         return cartRepository.save(newCart);
+
     }
 
-    public String  updateCartProductById(long id, Product product){
+    public String  updateCartProductById(long id, CartProduct cartProduct){
 
         Cart existingCart = getById(id);
         Cart newCart = new Cart();
-        Collection<Product> newProducts = new ArrayList<>();
-
-        newCart.setQuantity(existingCart.getQuantity());
-        newCart.setBuyer(existingCart.getBuyer());
+        Collection<CartProduct> newCartProducts = new ArrayList<>();
+        System.out.println(cartProduct);
         newCart.setOrder(existingCart.getOrder());
-        newProducts.add(product);
-        existingCart.getProducts().addAll(
-                newProducts
-                        .stream()
-                        .map(p->{
-                            Product pp = productService.getById(p.getProductId());
-                            pp.getCarts().add(existingCart);
-                            return pp;
-                        }).collect(Collectors.toList()));
+        newCart.setBuyer(existingCart.getBuyer());
+        newCartProducts.add(cartProduct);
+        existingCart.getCartProducts().addAll((newCartProducts
+                .stream()
+                .map(cp -> {
+                    System.out.println(cp);
+                    Product pp = productService.getById(cp.getProduct().getProductId());
+                    CartProduct newCartProduct = new CartProduct();
+                    newCartProduct.setProduct(pp);
+                    newCartProduct.setCart(existingCart);
+                    newCartProduct.setQuantity(cp.getQuantity());
+
+                    return newCartProduct;
+                }).collect(Collectors.toList())
+        ));
 
         cartRepository.save(existingCart);
 
@@ -63,18 +77,29 @@ public class CartService {
     public Cart getById(long id){
         return cartRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
+
     public List<Cart> getAll(){
         return cartRepository.findAll();
     }
 
-    public Cart updateCart(Long id, Cart updatedCart){
-        Cart existingCart = cartRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        existingCart.setQuantity(updatedCart.getQuantity());
+    public Collection<CartProduct> updateCartQuantityById(Long cartId,Long productId, int quantity){
+        Cart existingCart = cartRepository.findById(cartId).orElseThrow(EntityNotFoundException::new);
+        CartProduct existingCartProduct = cartProductRepository.findByCartProductId(new CartProductId(cartId, productId));
+        existingCartProduct.setQuantity(quantity);
 
-        return cartRepository.save(existingCart);
+        existingCart.getCartProducts().stream().map(e->{
+            if(e.getCartProductId() == existingCartProduct.getCartProductId()){
+                e.setQuantity(quantity);
+            }
+
+            return existingCart;
+        }).collect(Collectors.toList());
+
+        existingCart.setCartProducts(existingCart.getCartProducts());
+        cartRepository.save(existingCart);
+
+        return existingCart.getCartProducts();
     }
-
-
 
     public String deleteById(long id){
         cartRepository.deleteById(id);

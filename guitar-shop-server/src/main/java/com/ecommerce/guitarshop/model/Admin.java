@@ -1,10 +1,12 @@
 package com.ecommerce.guitarshop.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -23,6 +25,7 @@ public class Admin {
     private String adminUserName;
 
     @NotEmpty
+    @NotNull
     private String adminFirstName;
 
     @NotEmpty
@@ -34,6 +37,9 @@ public class Admin {
     @NotEmpty
     @Size(max = 8)
     private String adminPassword;
+
+    @NotEmpty
+    private Boolean status;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "admin",  fetch = FetchType.LAZY)
     @JsonManagedReference(value =  "admin-product")

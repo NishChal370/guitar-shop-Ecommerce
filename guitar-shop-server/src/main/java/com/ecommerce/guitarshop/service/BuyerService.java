@@ -33,6 +33,7 @@ public class BuyerService {
         existingBuyer.setBuyerPhone(updatedBuyer.getBuyerPhone());
         existingBuyer.setBuyerEmail(updatedBuyer.getBuyerEmail());
         existingBuyer.setBuyerPassword(updatedBuyer.getBuyerPassword());
+        existingBuyer.setStatus(updatedBuyer.getStatus());
 
         return buyerRepository.save(existingBuyer);
     }

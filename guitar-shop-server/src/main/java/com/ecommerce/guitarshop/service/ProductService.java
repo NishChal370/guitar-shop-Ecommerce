@@ -2,9 +2,15 @@ package com.ecommerce.guitarshop.service;
 
 import com.ecommerce.guitarshop.dao.ProductRepository;
 import com.ecommerce.guitarshop.model.Product;
+
+import java.util.Base64;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.EntityNotFoundException;
 
 @Service
@@ -14,6 +20,24 @@ public class ProductService {
     ProductRepository productRepository;
 
     public Product save(Product product){
+
+//        System.out.println(product);
+//        String fileName = StringUtils.cleanPath(product.getImageOne());
+//        if(fileName.contains("...")){
+//            System.out.println("not a valid file");
+//        }
+//        Product newProduct = new Product();
+//        newProduct.setName(product.getName());
+//        newProduct.setDetail(product.getDetail());
+//        newProduct.setFeature(product.getFeature());
+//        newProduct.setType(product.getType());
+//        newProduct.setPrice(product.getPrice());
+//        newProduct.setImageOne(Base64.getEncoder().encodeToString(fileName.getBytes()));
+////        newProduct.setImageOne(pr);
+//        newProduct.setImageTwo(product.getImageTwo());
+//        newProduct.setImageThree(product.getImageThree());
+//        newProduct.setProductCompany(product.getProductCompany());
+//
         return productRepository.save(product);
     }
 

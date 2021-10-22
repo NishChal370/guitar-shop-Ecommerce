@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.profile__container{
+    /* background-color: green; */
+    border: 1rem solid var(--border-color);
+    background-color: rgba(129, 129, 194, 0.452);
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    font-size: 2rem;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.profile__figure{
+    width: 20%;
+    position: relative;
+    left: 40%;
+    bottom: 10%;
+    border: 1rem solid var(--border-color);
+    border-radius: 50%;
+}
+
+.profile__figure img{
+    width: 100%;
+}
+
+.profile__container h3{
+    font-size: 4rem;
+}
+
+/* .user__name{
+    font-size: 2rem;
+} */
+
+/* .section--flex{
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    
+} */
+
+.info__container{
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+    /* background-color: blueviolet; */
+}
+
+.company__name{
+    position: relative;
+    top: 6rem;
+    font-family: 'Great Vibes', cursive;
+    /* background-color: blueviolet; */
+}

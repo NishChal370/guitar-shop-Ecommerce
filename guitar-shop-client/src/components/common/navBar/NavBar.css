@@ -1,16 +1,24 @@
+.navbar{
+    border-bottom: 1.6px solid var(--border-color);
+}
 .nav-link{
     color: rgb(19, 18, 18);
 }
 
-.nav-login-container{
+/* .nav-login-container{
     display: flex;
-}
+} */
 
 .nav-logo--size{
+    margin: 0rem;
     font-size: 2rem;
     padding-top: 0rem;
-    margin: 0rem;
 }
+
 .nav-link--top-margin{
     margin-top: 0.6rem;
+}
+
+.navbar-brand{
+    cursor: pointer;
 }

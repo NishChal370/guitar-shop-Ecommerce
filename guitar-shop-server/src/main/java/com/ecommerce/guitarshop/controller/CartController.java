@@ -1,7 +1,11 @@
 package com.ecommerce.guitarshop.controller;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+
 import com.ecommerce.guitarshop.model.Cart;
+import com.ecommerce.guitarshop.model.CartProduct;
 import com.ecommerce.guitarshop.model.Product;
 import com.ecommerce.guitarshop.service.CartService;
 import org.springframework.http.HttpStatus;
@@ -27,20 +31,22 @@ public class CartController {
 
     @PostMapping("/saveCart")
     public ResponseEntity<Cart> setCart(@RequestBody Cart cart){
+        System.out.println("ME called");
+        System.out.println(cart);
         return new ResponseEntity<Cart>(
                 service.save(cart), HttpStatus.CREATED);
     }
 
-    @PutMapping("/updateCart/{id}")
-    public ResponseEntity<Cart> updateCart(@PathVariable Long id, @RequestBody Cart cart){
-        return new ResponseEntity<Cart>(
-                service.updateCart(id, cart), HttpStatus.CREATED);
+    @PutMapping("/updateCart/cartId={cartId}/productId={productId}/quantity={quantity}")
+    public ResponseEntity<Collection<CartProduct>> updateCartQuantityById(@PathVariable Long cartId, @PathVariable Long productId, @PathVariable int quantity){
+        return new ResponseEntity<Collection<CartProduct>>(
+                service.updateCartQuantityById(cartId, productId, quantity), HttpStatus.CREATED);
     }
 
     @PatchMapping("/updateCartProductsById/{id}")
-    public String updateCartProductsById(@PathVariable Long id, @RequestBody Product product){
+    public String updateCartProductsById(@PathVariable Long id, @RequestBody CartProduct cartProduct){
         System.out.println("IN side");
-        return service.updateCartProductById(id, product);
+        return service.updateCartProductById(id, cartProduct);
     }
 
     @DeleteMapping("/deleteCartById/{id}")
