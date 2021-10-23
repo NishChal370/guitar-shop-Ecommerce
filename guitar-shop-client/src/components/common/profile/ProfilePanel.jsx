@@ -35,7 +35,7 @@ function ProfilePanel() {
     console.log(profile);
     return (
         <>
-        {(profile !== undefined) &&(
+        {(profile !== undefined) && (
             <div className="profile__container">
                 <figure className="profile__figure">
                     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" />    

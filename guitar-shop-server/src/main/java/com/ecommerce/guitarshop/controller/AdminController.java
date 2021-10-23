@@ -43,6 +43,15 @@ public class AdminController {
         return service.validate(adminEmail, adminPassword);
     }
 
+//    @PostMapping("/api/login")
+//    public ResponseEntity<LoginDto> authenticateUser(@RequestBody LoginDto loginDto) {
+//        LoginDto userGetDto = service.validate(loginDto);
+//        return new ResponseEntity<LoginDto>(userGetDto, HttpStatus.OK);
+//    }
+
+//    @GetMapping("/admin/login")
+//    public List<Admin> loginAdmin(@RequestParam("adminEmail") String adminEmail,@RequestParam("adminPassword") String adminPassword){
+//        return service.validate(adminEmail, adminPassword);
 //    @GetMapping("/admin/login/{adminEmail}/{adminPassword}")
 //    public List<Admin> loginAdmin(@PathVariable("adminEmail") String adminEmail,@PathVariable("adminPassword") String adminPassword){
 //        return service.validate(adminEmail, adminPassword);

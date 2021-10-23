@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GoDiffAdded, GoDiffRemoved } from "react-icons/go";
 
 import { setCategory } from '../../redux/Action';
+import { NavLink } from 'react-router-dom';
 
-function SideNav({changeSelectedProduct}) {
+// function SideNav({changeSelectedProduct}) {
+function SideNav() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [isAddingCateogary, setAddingCateogary] = useState(false);
@@ -16,7 +18,7 @@ function SideNav({changeSelectedProduct}) {
     const adminState = useSelector(state => state.adminReducer.data);
     const categoryProductState = useSelector(state => state.categoryReducer.data);
     
-    const addCateogaryHandler=()=>{
+    const editCateogaryHandler=()=>{
         (!isAddingCateogary)
             ?setAddingCateogary(true)
             :setAddingCateogary(false)
@@ -105,14 +107,14 @@ function SideNav({changeSelectedProduct}) {
 
     return (
         <div className="side__nav">
-            <h1>Helo</h1>
             <section>
                 <h2 className="side__nav__title">Available cateogary</h2>
             </section>
             <section>
                 <ul className="side__nav__list">
                     {(categoryProductState !== undefined) && availableCateogaryList.map((cateogary, index)=>{
-                        return<li key={`catogaryNav${index}`} onClick={()=>changeSelectedProduct(cateogary)}>{cateogary}</li>
+                        return <NavLink className="nav-link nav-link--padding" key={`catogaryNav${index}`} exact to={{pathname:"/admin/products/p", state: cateogary}}>{cateogary}</NavLink>
+                        // <li key={`catogaryNav${index}`} onClick={()=>changeSelectedProduct(cateogary)}>{cateogary}</li>
                     })}                 
                 </ul>
             </section>
@@ -123,7 +125,7 @@ function SideNav({changeSelectedProduct}) {
                 <section>
                     <ul className="side__nav__list">
                         <li onClick={()=>history.push({pathname:  "/admin/products/a"})}>Add Products</li>
-                        <li onClick={addCateogaryHandler}>Edit cateogary</li>
+                        <li onClick={editCateogaryHandler}>Edit cateogary</li>
                         {(isAddingCateogary)&& <li className="add-cateogary__field"><input type="text"  value={cateogaryInput.categoryName} onChange={changeCateogaryInputHandler} /><p onClick={saveCateogary}><GoDiffAdded/></p> <p onClick={deleteCateogaryHandler}><GoDiffRemoved/></p></li>}
                         {/* <li onClick={()=>history.push({pathname:  "/admin/products/editProduct", state: {fetch:"adminById" }})}>My Account</li> */}
                         

@@ -15,19 +15,21 @@ function ProductCart({product, calledFrom, categoryId}) {
             state: {product: product, categoryId: categoryId}
          });
     }
+
+    console.log(categoryId);
     
     return (
         <div className="card">
             <figure className="card__figure">
                 <img src={imageOne} className="card-img-top" alt="productImage"/>
-                <figcaption className="card__caption">
+                <figcaption className="card__caption" >
                     {(calledFrom !== "admin")
                       ? <>
                             <span className="cart__icons">
                                 <p><GiSelfLove/></p>
                                 <p><MdOutlineShoppingBag/></p>
                             </span>
-                            <h5 className='card__overview'>Over view</h5>
+                            <h5 className='card__overview'  onClick={()=>history.push({pathname: '/product/overview', state:{categoryId: categoryId, product:product}})}>Over view</h5>
                         </>
                       :<> 
                         <p className="card__edit--button" onClick={editProducthandler} >Edit</p>
@@ -39,7 +41,7 @@ function ProductCart({product, calledFrom, categoryId}) {
             </figure>
             
             <div className="card-body">
-                <p className="card-text">{name}</p>
+                <p className="card-title">{name}</p>
                 {
                     (calledFrom !== "admin") && (
                         <>

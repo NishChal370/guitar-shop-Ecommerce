@@ -9,19 +9,19 @@ import { setAdmin } from '../../redux/Action';
 
 
 function Login() {
-    const adminState = useSelector(state => state.adminReducer.data);
     const dispatch =  useDispatch();
+    const adminState = useSelector(state => state.adminReducer.data);
     
     const [adminInfo, setAdminInfo] = useState({email:"", password:""})
     let history = useHistory();
 
-    const changeHandler=(e)=>{
+    const changeInputHandler=(e)=>{
         let fieldName = e.target.type
         adminInfo[fieldName] = e.target.value;
         setAdminInfo({...adminInfo})
     }
 
-    const SubmitHandler=(e)=>{
+    const SubmitFormHandler=(e)=>{
         e.preventDefault();
         validate();
     }
@@ -49,8 +49,8 @@ function Login() {
                 title: 'Signed in successfully'
             });
             
-            setAdminInfo({email:"", password:""});
-            history.push("/admin/products/p");
+            // setAdminInfo({email:"", password:""});
+            history.push({pathname:"/admin/products/p", state: "Guitar"});
         }
         else{
             Toast.fire({
@@ -89,16 +89,16 @@ function Login() {
             <figure>
                 <img src="https://www.kindpng.com/picc/m/273-2738804_php-login-and-authentication-login-hd-png-download.png" alt="login-logo" />    
             </figure>
-            <form className="adminlogin__container" onSubmit={(e)=>SubmitHandler(e)} >
+            <form className="adminlogin__container" onSubmit={(e)=>SubmitFormHandler(e)} >
                 <h3>Log in</h3>
                 <section className="input__container">
                     <div className="form-group" >
                         <label htmlFor="exampleInputEmail1">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" value={adminInfo.email} onChange={(e)=>changeHandler(e)} aria-describedby="emailHelp" placeholder="Enter email"/>
+                        <input type="email" className="form-control" id="exampleInputEmail1" value={adminInfo.email} onChange={(e)=>changeInputHandler(e)} aria-describedby="emailHelp" placeholder="Enter email"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Password</label>
-                        <input type="password" className="form-control" value={adminInfo.password} onChange={(e)=>changeHandler(e)} id="exampleInputPassword1" placeholder="Password"/>
+                        <input type="password" className="form-control" value={adminInfo.password} onChange={(e)=>changeInputHandler(e)} id="exampleInputPassword1" placeholder="Password"/>
                     </div>
                     <br/>
                     <button type='submit'  className="btn btn-primary">Login</button>

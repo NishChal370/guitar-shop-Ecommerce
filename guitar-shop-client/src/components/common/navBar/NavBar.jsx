@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './NavBar.css'
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { GiLoveHowl } from "react-icons/gi";
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { NavLink } from 'react-router-dom';
 
 function NavBar({calledFrom}) {
     let history = useHistory();
     const categoryState = useSelector(state => state.categoryReducer.data);
+    // const  [selectedProduct, setSelectedProduct]= useState("Guitar");
+   
+    // const changeSelectedProductHandler=(name)=>{
+    //     history.push({pathname:"/products/p", state: name});
+    //     setSelectedProduct(name);
+    // }
+
 
     return (
         <nav className="navbar  fixed-top navbar-light bg-light">
@@ -34,7 +42,7 @@ function NavBar({calledFrom}) {
                                     </li>
                                     {[<GiLoveHowl/>, <MdOutlineShoppingBag/>].map((value,index)=>{
                                         return(
-                                            <li key={`productNav${index}`}className="nav-item">
+                                            <li key={`productNav${index}`}className="nav-item" onClick={()=>(index===1)&&history.push('/shoppingcart')}>
                                                 <p className="nav-link nav-logo--size" >{value}</p>
                                             </li>
                                         )
@@ -44,19 +52,21 @@ function NavBar({calledFrom}) {
                             <section>
                                 <ul className="nav justify-content-end">
                                     <li className="nav-item">
-                                        <a className="nav-link active" aria-current="page" onClick={()=> history.push("/")}>HOME</a>
+                                    <NavLink className="nav-link"  exact to="/">HOME</NavLink>
+                                        {/* <a className="nav-link active" aria-current="page" onClick={()=> history.push("/")}>HOME</a> */}
                                     </li>
                                     
                                     {(categoryState !== undefined) && categoryState.map((value, index)=>{
                                         return(
                                             <li key={`navCateog ${index}`} className="nav-item dropdown">
-                                                <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" onClick={()=>history.push("/products")} role="button" aria-expanded="false">{(value.categoryName !== null) && value.categoryName.toUpperCase()}</a>
+                                                <NavLink className="nav-link dropdown-toggle"  exact to={{pathname:"/products/p", state: value.categoryName}}>{(value.categoryName !== null) && value.categoryName.toUpperCase()}</NavLink>
+                                                {/* <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" onClick={()=>changeSelectedProductHandler(value.categoryName)} role="button" aria-expanded="false">{(value.categoryName !== null) && value.categoryName.toUpperCase()}</a>
                                                 <ul className="dropdown-menu">
                                                     <li><p className="dropdown-item" href="...">Third</p></li>
                                                     <li><p className="dropdown-item" href="...">Fourth</p></li>
                                                     <li><hr className="dropdown-divider"/></li>
                                                     <li><p className="dropdown-item" href="...">Fifth</p></li>
-                                                </ul>
+                                                </ul> */}
                                             </li>
                                         )
                                     })}

@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
-function SideNavBar() {
+function SideNavBar({getSelectedProductName}) {
     const categoryProductState = useSelector(state => state.categoryReducer.data);
     
     const availableCateogaryList = (categoryProductState !== undefined) && (categoryProductState.map((cateogary)=>{
@@ -17,28 +18,14 @@ function SideNavBar() {
             <section>
                 <ul className="side__nav__list">
                     {(categoryProductState !== undefined) && availableCateogaryList.map((cateogary, index)=>{
-                        return<li key={`catogaryNav${index}`} >{cateogary}</li>
+                        console.log(cateogary);
+                        return <NavLink className="nav-link nav-link--padding" key={`catogaryNav${index}`} exact to={{pathname:"/products/p", state: cateogary}} onClick={()=>{getSelectedProductName(cateogary)}}>{cateogary}</NavLink>
+                        // <li key={`catogaryNav${index}`}  onClick={()=>changeSelectedProduct(cateogary)}>{cateogary}</li>
                     })}                 
                 </ul>
             </section>
         </div>
 
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
-        <h1>Side Nav</h1>
         </>
     )
 }

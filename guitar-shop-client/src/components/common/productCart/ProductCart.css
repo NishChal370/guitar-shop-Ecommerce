@@ -13,6 +13,10 @@
     background-color: white;
 }
 
+.card-title{
+    font-size: 1.6rem;
+    font-weight: bold;
+}
 
 .card__caption{
     position: absolute;
@@ -59,7 +63,7 @@
 }
 
 
-/* .product-quantity__continer{
+.product-quantity__continer{
     display: flex;
     gap: 1rem;
 }
@@ -67,12 +71,12 @@
     display: flex;
     gap: 1rem;
     
-} */
+}
 
-.quantity__button{
+/* .quantity__button{
     background-color: rgb(199, 198, 198);
     border-radius: 6px;
     margin-bottom: 4rem;
 
 }
-
+ */

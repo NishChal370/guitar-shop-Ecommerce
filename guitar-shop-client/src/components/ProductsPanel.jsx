@@ -1,48 +1,35 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router';
+import { Route, Switch, useHistory } from 'react-router';
+// import ProductsList from './admin/ProductsList';
 import SideNavBar from './common/navBar/SideNavBar';
+import ProductsList from './common/productCart/ProductsList';
+import ProfilePanel from './common/profile/ProfilePanel';
 import "./index.css"
 
 function ProductsPanel() {
     const history = useHistory();
-    const  [selectedProduct, setSelectedProduct]= useState("Guitar");
-   
-    const changeSelectedProductHandler=(name)=>{
-        history.push("/admin/products/p");
-        setSelectedProduct(name);
+    let  [selectedProductName, setSelectedProductName]= useState("Guitar");
+
+    const getSelectedProductNameHandler=(name)=>{
+        setSelectedProductName(name);
     }
 
     return (
+        <>
+        <img src="https://treasuremusicstore.com/wp-content/uploads/2020/06/Laney_amplifier_nepal-scaled.jpg" class="img-fluid" alt="..." style={{paddingTop:"8rem"}}></img>
         <div className="products__conatiner">
-            <SideNavBar changeSelectedProduct={changeSelectedProductHandler}/>
-            <h1>1Product panel</h1>
-            <h1>2Product panel</h1>
-            <h1>3Product panel</h1>
-            <h1>4Product panel</h1>
-            <h1>5Product panel</h1>
-            <h1>6Product panel</h1>
-            <h1>7Product panel</h1>
-            <h1>8Product panel</h1>
-            <h1>9Product panel</h1>
-            <h1>10Product panel</h1>
-            <h1>11Product panel</h1>
-            <h1>12Product panel</h1>
-            <h1>13Product panel</h1>
-            
-            <h1>14Product panel</h1>
-            <h1>15Product panel</h1>
-            <h1>16Product panel</h1>
-            <h1>17Product panel</h1>
-            <h1>18Product panel</h1>
-            <h1>19Product panel</h1>
-            <h1>Product panel</h1>
-            <h1>Product panel</h1>
-            <h1>Product panel</h1>
-            <h1>Product panel</h1>
-            <h1>Product panel</h1>
-            <h1>Product panel</h1>
+            <SideNavBar getSelectedProductName={getSelectedProductNameHandler}/>
+            <Switch>
+                <Route path="/profile">
+                    <ProfilePanel/>
+                </Route>
+                <Route path="/products/p">
+                    <ProductsList show={selectedProductName} calledFrom="user"/>
+                </Route>                    
+            </Switch>
 
         </div>
+        </>
     )
 }
 
