@@ -39,9 +39,14 @@ public class AdminController {
     }
 
     @GetMapping("/admin/login")
-    public List<Admin> loginAdmin(@RequestParam("adminEmail") String adminEmail,@RequestParam("adminPassword") String adminPassword){
+    public Object loginAdmin(@RequestParam("adminEmail") String adminEmail,@RequestParam("adminPassword") String adminPassword){
         return service.validate(adminEmail, adminPassword);
     }
+    //->> this is correct
+//    public List<LoginDto> loginAdmin(@RequestParam("adminEmail") String adminEmail,@RequestParam("adminPassword") String adminPassword){
+//        return service.validate(adminEmail, adminPassword);
+//    }
+    //<--
 
 //    @PostMapping("/api/login")
 //    public ResponseEntity<LoginDto> authenticateUser(@RequestBody LoginDto loginDto) {

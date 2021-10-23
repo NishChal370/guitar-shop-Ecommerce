@@ -23,7 +23,8 @@ function Login() {
 
     const SubmitFormHandler=(e)=>{
         e.preventDefault();
-        validate();
+        fetchAdminData();
+        // validate();
     }
 
     // for alert message using external libary
@@ -40,37 +41,77 @@ function Login() {
     });
 
     const validate=()=>{
-        const existingEmail = adminState[0].adminEmail;
-        const existingPassword = adminState[0].adminPassword;
-          
-        if(existingEmail === adminInfo.email && existingPassword === adminInfo.password){
-            Toast.fire({
-                icon: 'success',
-                title: 'Signed in successfully'
-            });
+        console.log("valid ",adminState);
+        // if(adminState.length !== 0){
+        //     console.log("found",adminState[0]);
+        // }else{
+        //     console.log("length 0");
+        // }
+
+        // if(adminState !== undefined){
+        //     console.log("validate defined", adminState);
+        //     console.log(adminState);
+        // }
+        // else{
+        //     console.log("validate undefined", adminState);
+        // }
+
+
+
+        // console.log("valid ",adminState.length);
+        // if(adminState !== [] || adminState !== undefined){
+        //     const existingEmail = adminState[0].adminEmail;
+        //     const existingPassword = adminState[0].adminPassword;
+        //     if(existingEmail === adminInfo.email && existingPassword === adminInfo.password){
+        //         Toast.fire({
+        //             icon: 'success',
+        //             title: 'Signed in successfully'
+        //         });
+                        
+        //         // setAdminInfo({email:"", password:""});
+        //         history.push({pathname:"/admin/products/p", state: "Guitar"});
+        //     }
+        // }
+        // else{
+        //     Toast.fire({
+        //         icon: 'error',
+        //         title: 'Incorrect email or password !!'
+        //     });
+        // }
+        // if(existingEmail === adminInfo.email && existingPassword === adminInfo.password){
+        //     Toast.fire({
+        //         icon: 'success',
+        //         title: 'Signed in successfully'
+        //     });
             
-            // setAdminInfo({email:"", password:""});
-            history.push({pathname:"/admin/products/p", state: "Guitar"});
-        }
-        else{
-            Toast.fire({
-                icon: 'error',
-                title: 'Incorrect email or password !!'
-            });
-        }
+        //     // setAdminInfo({email:"", password:""});
+        //     history.push({pathname:"/admin/products/p", state: "Guitar"});
+        // }
+        // else{
+        //     Toast.fire({
+        //         icon: 'error',
+        //         title: 'Incorrect email or password !!'
+        //     });
+        // }
     }
 
     const fetchAdminData=()=>{
         // Make a request for a user with a given ID
-        axios.get(`http://localhost:3037/admin/login?adminEmail=nis@dd.com&adminPassword=1234`)
+        axios.get(`http://localhost:3037/admin/login?adminEmail=${adminInfo.email}&adminPassword=${adminInfo.password}`)
             .then((response) => {
             // handle success
+            console.log("-------");
+            console.log("fetch ",response);
+            console.log("fetch ",response.data.status);
+            console.log(response);
+            console.log("-------");
             if(response.status.toString() === '200'){
-                let adminResponse = response.data.map((data, i)=>{
-                    return {adminId: data.adminId, adminEmail: data.adminEmail, adminPassword: data.adminPassword}
-                });
+                // let adminResponse = response.data.map((data, i)=>{
+                //     return {adminId: data.adminId, adminEmail: data.adminEmail, adminPassword: data.adminPassword}
+                // });
                 
-                dispatch(setAdmin(adminResponse));
+                // dispatch(setAdmin(adminResponse));
+                dispatch(setAdmin(response.data));
             }
 
             })
@@ -79,10 +120,10 @@ function Login() {
                 console.log("Error -> ",error);
             });
     }
-
+    console.log("out ",adminState);
     useEffect(()=>{
-        fetchAdminData();
-    },[]);
+        validate();
+    },[adminState]);
 
     return (
         <div className="login__container">
