@@ -49,18 +49,17 @@ function App() {
 
   useEffect(()=>{
     fetchCategoryData();
-    fetchProductData();
+    // fetchProductData();
   },[])
   
   return (
   <div className="App">
-    
-      <Router>
-        <Switch>
-          <Route path="/admin" component={Admin} />
-          <Route path="/" component={MainFrame} />
-        </Switch>
-      </Router>
+    <Router>
+      <Switch>
+        <Route path="/admin" component={Admin} />
+        <Route path="/" component={MainFrame} />
+      </Switch>
+    </Router>
   </div>
 
   );

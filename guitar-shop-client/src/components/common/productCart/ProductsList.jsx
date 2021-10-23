@@ -28,7 +28,6 @@ function ProductsList({calledFrom}) {
                                     ? categoryInfo.products.map((product, index)=>{
                                             return(
                                                 <span className="tab-pane fade show cart--shadow">
-                                                    {console.log("me ", categoryInfo)}
                                                     <ProductCart key={`featureProd${index}`} product={product} categoryId={categoryInfo.categoryId} calledFrom= {calledFrom}/>
                                                 </span>
                                             )

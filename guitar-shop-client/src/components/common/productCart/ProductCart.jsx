@@ -8,7 +8,9 @@ import { MdOutlineShoppingBag, MdOutlineStarBorderPurple500 } from "react-icons/
 function ProductCart({product, calledFrom, categoryId}) {
     const history = useHistory();
     let{name, price, imageOne, productQuantity} = product;
-    
+    console.log("->>>>>");
+    console.log(product);
+    console.log("<-----");
     const editProducthandler=()=>{
         history.push({
             pathname:  "/admin/products/a",

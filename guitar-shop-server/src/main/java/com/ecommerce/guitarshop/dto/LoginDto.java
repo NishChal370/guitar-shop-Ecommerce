@@ -13,4 +13,5 @@ public class LoginDto {
     private long adminId;
     private String adminEmail;
     private String adminPassword;
+
 }

@@ -1,8 +1,13 @@
 package com.ecommerce.guitarshop.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import com.ecommerce.guitarshop.dto.ProductGetDto;
+import com.ecommerce.guitarshop.dto.ProductPostDto;
 import com.ecommerce.guitarshop.model.Product;
 import com.ecommerce.guitarshop.service.ProductService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +32,24 @@ public class ProductController {
     }
 
     @PostMapping("/saveProduct")
-    public ResponseEntity<Product> setProduct(@RequestBody Product product){
-        return new ResponseEntity<Product>(
-                service.save(product), HttpStatus.CREATED);
+    public ResponseEntity<ProductGetDto> setProduct(String product, @RequestParam("file") MultipartFile file) throws IOException {
+        ProductPostDto productPostDto = new ObjectMapper().readValue(product, ProductPostDto.class);
+        service.save(productPostDto, file);
+        //        return new ResponseEntity<Product>(
+//                service.save(product), HttpStatus.CREATED);
+
+//        return service.save(productPostDto, file);
+        return new ResponseEntity<ProductGetDto>(
+                service.save(productPostDto, file), HttpStatus.CREATED);
     }
 
+    //->> this is correct
+//    @PostMapping("/saveProduct")
+//    public ResponseEntity<Product> setProduct(@RequestBody Product product){
+//        return new ResponseEntity<Product>(
+//                service.save(product), HttpStatus.CREATED);
+//    }
+    //<<----
     @PostMapping("/saveProducts")
     public ResponseEntity<List<Product>> setProducts(@RequestBody List<Product> products){
         System.out.println("frist");

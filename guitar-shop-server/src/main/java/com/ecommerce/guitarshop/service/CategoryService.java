@@ -3,8 +3,12 @@ package com.ecommerce.guitarshop.service;
 import com.ecommerce.guitarshop.dao.CategoryRepository;
 import com.ecommerce.guitarshop.model.Category;
 import java.util.List;
+
+import com.ecommerce.guitarshop.model.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import javax.persistence.EntityNotFoundException;
 
 @Service
@@ -25,7 +29,14 @@ public class CategoryService {
     }
 
     public List<Category> getAll(){
-        return categoryRepository.findAll();
+         List<Category> cateogary = categoryRepository.findAll();
+        for(Category c:cateogary){
+            for (Product p: c.getProducts()){
+                p.setImageOne(ServletUriComponentsBuilder.fromCurrentContextPath().path("/productImage/").path(p.getImageOne()).toUriString());
+            }
+        }
+
+        return cateogary;
     }
 
     public Category updateCategory(Long id, Category updatedCategory){
