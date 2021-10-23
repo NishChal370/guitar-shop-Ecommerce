@@ -8,18 +8,14 @@ import { MdOutlineShoppingBag, MdOutlineStarBorderPurple500 } from "react-icons/
 function ProductCart({product, calledFrom, categoryId}) {
     const history = useHistory();
     let{name, price, imageOne, productQuantity} = product;
-    console.log("->>>>>");
-    console.log(product);
-    console.log("<-----");
+
     const editProducthandler=()=>{
         history.push({
             pathname:  "/admin/products/a",
-            state: {product: product, categoryId: categoryId}
+            editingProductData: {product: product, categoryId: categoryId}
          });
     }
 
-    console.log(categoryId);
-    
     return (
         <div className="card">
             <figure className="card__figure">
@@ -35,15 +31,14 @@ function ProductCart({product, calledFrom, categoryId}) {
                         </>
                       :<> 
                         <p className="card__edit--button" onClick={editProducthandler} >Edit</p>
-                        <h5 className='card__overview overview--height'>Over view</h5>
+                        {/* <h5 className='card__overview overview--height'>Over view</h5> */}
                       </>
-                     
                     } 
                 </figcaption>
             </figure>
             
             <div className="card-body">
-                <p className="card-title">{name}</p>
+                <p className="card-title">{name.slice(0, 28)+"...."}</p>
                 {
                     (calledFrom !== "admin") && (
                         <>
@@ -57,7 +52,7 @@ function ProductCart({product, calledFrom, categoryId}) {
                 }
                 <h5 className="card-price">${price}</h5>
                 {(calledFrom !== "admin")
-                    ? <p className="btn bg-dark text-white"><GiShoppingBag/>&emsp;ADD TO CART</p>
+                    ? <p className="btn bg-dark text-white"> <GiShoppingBag/>&emsp;ADD TO CART </p>
                     : <div className="product-quantity__continer">
                         <p>Avaible quantity: {productQuantity}</p>
                     </div>

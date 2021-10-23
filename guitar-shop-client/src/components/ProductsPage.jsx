@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { Route, Switch, useHistory } from 'react-router';
 // import ProductsList from './admin/ProductsList';
 import SideNavBar from './common/navBar/SideNavBar';
-import ProductsList from './common/productCart/ProductsList';
+import ProductsListPanel from './common/productCart/ProductsListPanel';
+// import ProductsList from './common/productCart/ProductsList';
 import ProfilePanel from './common/profile/ProfilePanel';
 import "./index.css"
 
-function ProductsPanel() {
+function ProductsPage() {
     const history = useHistory();
     let  [selectedProductName, setSelectedProductName]= useState("Guitar");
 
@@ -24,7 +25,7 @@ function ProductsPanel() {
                     <ProfilePanel/>
                 </Route>
                 <Route path="/products/p">
-                    <ProductsList show={selectedProductName} calledFrom="user"/>
+                    <ProductsListPanel show={selectedProductName} calledFrom="user"/>
                 </Route>                    
             </Switch>
 
@@ -33,4 +34,4 @@ function ProductsPanel() {
     )
 }
 
-export default ProductsPanel
+export default ProductsPage

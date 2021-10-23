@@ -34,7 +34,6 @@ public class ProductController {
     @PostMapping("/saveProduct")
     public ResponseEntity<ProductGetDto> setProduct(String product, @RequestParam("file") MultipartFile file) throws IOException {
         ProductPostDto productPostDto = new ObjectMapper().readValue(product, ProductPostDto.class);
-        service.save(productPostDto, file);
         //        return new ResponseEntity<Product>(
 //                service.save(product), HttpStatus.CREATED);
 
@@ -56,6 +55,13 @@ public class ProductController {
         System.out.println(products);
         return new ResponseEntity<List<Product>>(
                 service.saveAll(products), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/updateProductById/{productId}")
+    public String updateProducts(@PathVariable Long productId,@RequestParam("product") String product, @RequestParam("file") MultipartFile file) throws IOException {
+        ProductPostDto productPostDto = new ObjectMapper().readValue(product, ProductPostDto.class);
+
+        return service.updateProduct(productId, productPostDto, file);
     }
 
     @PatchMapping("/updateProductQuantityById/{id}&{quantity}")

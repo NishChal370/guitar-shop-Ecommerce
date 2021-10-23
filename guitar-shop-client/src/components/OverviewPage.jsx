@@ -5,7 +5,7 @@ import { useHistory, useLocation } from 'react-router'
 import { ImFacebook2, ImMail } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
 import '../index.css'
-function OverviewPanel() {
+function OverviewPage() {
     const {state} = useLocation();
     const history = useHistory();
     const productInfo = state.product;
@@ -70,4 +70,4 @@ function OverviewPanel() {
     )
 }
 
-export default OverviewPanel
+export default OverviewPage

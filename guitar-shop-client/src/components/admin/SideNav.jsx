@@ -129,7 +129,7 @@ function SideNav() {
                         {(isAddingCateogary)&& <li className="add-cateogary__field"><input type="text"  value={cateogaryInput.categoryName} onChange={changeCateogaryInputHandler} /><p onClick={saveCateogary}><GoDiffAdded/></p> <p onClick={deleteCateogaryHandler}><GoDiffRemoved/></p></li>}
                         {/* <li onClick={()=>history.push({pathname:  "/admin/products/editProduct", state: {fetch:"adminById" }})}>My Account</li> */}
                         
-                        <li onClick={()=>history.push({pathname:  "/admin/products/profile", state: {id: adminState[0].adminId, fetch:"adminById" }})}>My Account</li>
+                        <li onClick={()=>history.push({pathname: "/admin/products/profile", state: {id: adminState[0].adminId, fetch:"adminById" }})}>My Account</li>
                     </ul>
                 </section>
                 </>

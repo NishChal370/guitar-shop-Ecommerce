@@ -96,20 +96,52 @@ public class ProductService {
         return products;
     }
 
-    public Product updateProduct(Long id, Product updatedProduct){
-        Product existingProduct = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        existingProduct.setName(updatedProduct.getName());
-        existingProduct.setDetail(updatedProduct.getDetail());
-        existingProduct.setFeature(updatedProduct.getFeature());
-        existingProduct.setType(updatedProduct.getType());
-        existingProduct.setPrice(updatedProduct.getPrice());
-        existingProduct.setImageOne(updatedProduct.getImageOne());
-        existingProduct.setImageTwo(updatedProduct.getImageTwo());
-        existingProduct.setImageThree(updatedProduct.getImageThree());
-        existingProduct.setProductCompany(updatedProduct.getProductCompany());
+    public String updateProduct(Long productId, ProductPostDto updatedProductPostDto, MultipartFile updatedFile) throws IOException{
+        Product existingProduct = productRepository.findById(productId).orElseThrow(EntityNotFoundException::new);
 
-        return productRepository.save(existingProduct);
+        if( existingProduct != null ){
+            UUID uuid =UUID.randomUUID();
+            File saveFile = new ClassPathResource("static/productImage").getFile();
+            Path path = Paths.get(saveFile.getAbsolutePath()+File.separator + uuid + updatedFile.getOriginalFilename());
+            Files.copy(updatedFile.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+
+            Product newUpdatedProduct = productMapper.dtoToModel(updatedProductPostDto);
+            newUpdatedProduct.setImageOne(uuid+updatedFile.getOriginalFilename());
+
+            existingProduct.setName(newUpdatedProduct.getName());
+            existingProduct.setDetail(newUpdatedProduct.getDetail());
+            existingProduct.setFeature(newUpdatedProduct.getFeature());
+            existingProduct.setType(newUpdatedProduct.getType());
+            existingProduct.setPrice(newUpdatedProduct.getPrice());
+            existingProduct.setImageOne(newUpdatedProduct.getImageOne());
+            existingProduct.setImageTwo(newUpdatedProduct.getImageTwo());
+            existingProduct.setImageThree(newUpdatedProduct.getImageThree());
+            existingProduct.setProductCompany(newUpdatedProduct.getProductCompany());
+            productRepository.save(existingProduct);
+
+            return "Updated ID: "+ productId;
+        }
+        else{
+            return "Not Found";
+        }
+
+//        return "Updated";
     }
+
+//    public Product updateProduct(Long id, Product updatedProduct){
+//        Product existingProduct = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+//        existingProduct.setName(updatedProduct.getName());
+//        existingProduct.setDetail(updatedProduct.getDetail());
+//        existingProduct.setFeature(updatedProduct.getFeature());
+//        existingProduct.setType(updatedProduct.getType());
+//        existingProduct.setPrice(updatedProduct.getPrice());
+//        existingProduct.setImageOne(updatedProduct.getImageOne());
+//        existingProduct.setImageTwo(updatedProduct.getImageTwo());
+//        existingProduct.setImageThree(updatedProduct.getImageThree());
+//        existingProduct.setProductCompany(updatedProduct.getProductCompany());
+//
+//        return productRepository.save(existingProduct);
+//    }
 
     public String updateById(long id, int productQuantity){
         productRepository.updateProductById(id, productQuantity);

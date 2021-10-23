@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import './App.css';
@@ -11,6 +11,7 @@ import { setCategory, setProduct } from './redux/Action';
 function App() {
 
   const dispatch = useDispatch();
+  const categoryProductState = useSelector(state => state.categoryReducer.data);
 
   const fetchCategoryData=()=>{
     // Make a request for a user with a given ID
@@ -49,17 +50,29 @@ function App() {
 
   useEffect(()=>{
     fetchCategoryData();
-    // fetchProductData();
+    fetchProductData();
   },[])
-  
+console.log("first")
+  console.log(categoryProductState)
+  console.log("first")
   return (
   <div className="App">
-    <Router>
-      <Switch>
-        <Route path="/admin" component={Admin} />
-        <Route path="/" component={MainFrame} />
-      </Switch>
-    </Router>
+    {(categoryProductState === undefined )
+      ? <h2>Loading......</h2>
+      :(
+        (categoryProductState.length === 0)
+          ? <h3>Database is empty</h3>
+          :(<Router>
+                <Switch>
+                  <Route path="/admin" component={Admin} />
+                  <Route path="/" component={MainFrame} />
+                </Switch>
+            </Router>
+            )
+        )
+
+    }
+    
   </div>
 
   );

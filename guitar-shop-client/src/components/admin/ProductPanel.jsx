@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { Route, Switch, useHistory } from 'react-router';
 
 import SideNav from './SideNav';
-import EditProducts from './EditProducts';
+import EditProducts from './EditProductsPanel';
 // import ProductsList from './ProductsList';
 import NavBar from '../common/navBar/NavBar';
 import ProfilePanel from '../common/profile/ProfilePanel';
-import ProductsList from '../common/productCart/ProductsList';
+import ProductsList from '../common/productCart/ProductsListPanel';
+import ProductsListPanel from '../common/productCart/ProductsListPanel';
+import EditProductsPanel from './EditProductsPanel';
 
 function ProductPanel() {
     // const history = useHistory();
@@ -29,10 +31,10 @@ function ProductPanel() {
                         <ProfilePanel/>
                     </Route>
                     <Route path="/admin/products/p">
-                        <ProductsList calledFrom="admin"/>
+                        <ProductsListPanel calledFrom="admin"/>
                     </Route>
                     <Route path="/admin/products/a">
-                        <EditProducts/>
+                        <EditProductsPanel/>
                     </Route>
                     
                 </Switch>

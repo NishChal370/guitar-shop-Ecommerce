@@ -8,7 +8,7 @@ import SampleProduct from './SampleProduct';
 import FeaturedProducts from './FeaturedProducts';
 
 
-function Home() {
+function HomePage() {
     const categoryProductState = useSelector(state => state.categoryReducer.data);
 
     return (
@@ -54,4 +54,4 @@ function Home() {
 }
 
 
-export default Home
+export default HomePage

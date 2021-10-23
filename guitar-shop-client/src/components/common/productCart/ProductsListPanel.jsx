@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 // import ProductCart from '../common/productCart/ProductCart';
@@ -9,11 +9,12 @@ import ProductCart from './ProductCart';
 // import '../admin/index.css'
 import '../../admin/index.css'
 
-function ProductsList({calledFrom}) {
+function ProductsListPanel({calledFrom}) {
     const {state} = useLocation();
     console.log("PRO LISt ", state);
     const categoryState = useSelector(state => state.categoryReducer.data);
     console.log("PRo ldit",categoryState);
+    useEffect(()=>{},[categoryState]);
     return (
         <div className="admin__products__list">
             <h3>Available Products</h3>
@@ -50,4 +51,4 @@ function ProductsList({calledFrom}) {
     )
 }
 
-export default ProductsList
+export default ProductsListPanel

@@ -4,8 +4,10 @@ import ProductCart from '../common/productCart/ProductCart';
 
 function SampleProduct() {
     const categoryProductState = useSelector(state => state.categoryReducer.data);
+    
     const [slide1, setSlide1]= useState({start:0, end:2});
     const [slide2, setSlide2]= useState({start:0, end:2});
+
     const productOne = (categoryProductState !== undefined)?categoryProductState.at(0).products: "";
     const productTwo = (categoryProductState !== undefined)?categoryProductState.at(1).products: "";
 
@@ -14,11 +16,9 @@ function SampleProduct() {
         let buttonId = e.target.id;
         if(buttonName === "slide1"){
             if(buttonId === "end" && slide1.start === 0){
-                console.log("11");
                 slide1.start +=1;
                 slide1.end +=1;
             }else if(slide1.start >0){
-                console.log("12");
                 slide1.start -=1;
                 slide1.end -=1;
             }

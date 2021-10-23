@@ -1,7 +1,7 @@
 import React from 'react'
 import { ImCross } from 'react-icons/im'
 
-function ShoppingCartPanel() {
+function ShoppingCartPage() {
     return (
         <div className="shopping-cart__container">
             
@@ -85,4 +85,4 @@ function ShoppingCartPanel() {
     )
 }
 
-export default ShoppingCartPanel
+export default ShoppingCartPage
