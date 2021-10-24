@@ -10,14 +10,22 @@ import { NavLink } from 'react-router-dom';
 function NavBar({calledFrom}) {
     let history = useHistory();
     const categoryState = useSelector(state => state.categoryReducer.data);
-    // const  [selectedProduct, setSelectedProduct]= useState("Guitar");
-   
-    // const changeSelectedProductHandler=(name)=>{
-    //     history.push({pathname:"/products/p", state: name});
-    //     setSelectedProduct(name);
+    const cartState = useSelector(state => state.cartReducer.data);
+
+    console.log("FROM NAV", cartState);
+    // const directToSignUpPage=()=>{
+    //     // history.push({pathname:'/customer/signup', state:{formType: formType}})
+    //     history.push('/customer/registration');
     // }
 
-
+    const directToCartPage=()=>{
+        if(cartState.length >= 1){
+            history.push('/shoppingcart');
+        }
+        else{
+            alert("Please Login !!");
+        }
+    }
     return (
         <nav className="navbar  fixed-top navbar-light bg-light">
             <div className="container-fluid">
@@ -36,13 +44,13 @@ function NavBar({calledFrom}) {
                                     <li className="nav-item dropdown">
                                         <p className="nav-link dropdown-toggle nav-link--top-margin" data-bs-toggle="dropdown"  role="button" aria-expanded="false">MY ACCOUNT</p>
                                         <ul className="dropdown-menu">
-                                            <li><p className="dropdown-item ">LOG IN</p></li>
-                                            <li><p className="dropdown-item" >CREATE ACCOUNT</p></li>
+                                            <li><p className="dropdown-item " onClick={()=> history.push('/customer/login')}>LOG IN</p></li>
+                                            <li><p className="dropdown-item" onClick={()=>   history.push('/customer/registration')}>CREATE ACCOUNT</p></li>
                                         </ul>
                                     </li>
                                     {[<GiLoveHowl/>, <MdOutlineShoppingBag/>].map((value,index)=>{
                                         return(
-                                            <li key={`productNav${index}`}className="nav-item" onClick={()=>(index===1)&&history.push('/shoppingcart')}>
+                                            <li key={`productNav${index}`}className="nav-item" onClick={()=>directToCartPage()}>
                                                 <p className="nav-link nav-logo--size" >{value}</p>
                                             </li>
                                         )

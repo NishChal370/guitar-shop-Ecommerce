@@ -120,3 +120,12 @@
 .input--flex{
     display: flex;
 }
+
+.table--button{
+    text-align: right;
+}
+
+.table--button span:hover{
+    color: blue;
+    cursor: pointer;
+}

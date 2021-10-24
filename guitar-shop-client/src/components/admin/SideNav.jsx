@@ -25,8 +25,8 @@ function SideNav() {
     };
 
     const availableCateogaryList = (categoryProductState !== undefined) && (categoryProductState.map((cateogary)=>{
-            return cateogary.categoryName;
-        }));
+        return cateogary.categoryName;
+    }));
 
     // for alert message using external libary
     const Toast = Swal.mixin({

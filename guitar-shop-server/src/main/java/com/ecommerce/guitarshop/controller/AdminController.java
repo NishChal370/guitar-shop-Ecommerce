@@ -1,15 +1,12 @@
 package com.ecommerce.guitarshop.controller;
 
 import java.util.List;
-
-import com.ecommerce.guitarshop.dto.LoginDto;
 import com.ecommerce.guitarshop.model.Admin;
-import com.ecommerce.guitarshop.model.Buyer;
 import com.ecommerce.guitarshop.service.AdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.Valid;

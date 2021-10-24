@@ -82,7 +82,7 @@ function Login() {
             <figure>
                 <img src="https://www.kindpng.com/picc/m/273-2738804_php-login-and-authentication-login-hd-png-download.png" alt="login-logo" />    
             </figure>
-            <form className="adminlogin__container" onSubmit={(e)=>SubmitFormHandler(e)} >
+            <form className="login-input__container"  onSubmit={(e)=>SubmitFormHandler(e)}>
                 <h3>Log in</h3>
                 <section className="input__container">
                     <div className="form-group" >
@@ -94,9 +94,9 @@ function Login() {
                         <input type="password" className="form-control" value={adminInfo.password} onChange={(e)=>changeInputHandler(e)} id="exampleInputPassword1" placeholder="Password"/>
                     </div>
                     <br/>
-                    <button type='submit'  className="btn btn-primary">Login</button>
+                    <button type='submit' className="btn btn-primary" >Login</button>
                 </section>
-                <section className="message__container">
+                <section className="message__container" >
                     <p> Welcome to Planet Music Store </p>
                 </section>
             </form>

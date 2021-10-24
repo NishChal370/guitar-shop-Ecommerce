@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import './App.css';
 import Admin from './components/admin/Index';
+import BuyerLoginPage from './components/BuyerLoginPage';
+import BuyerRegistrationPage from './components/BuyerRegistrationPage';
 import MainFrame from './components/MainFrame';
 import { setCart, setCategory, setProduct } from './redux/Action';
 
@@ -86,6 +88,8 @@ console.log("first")
           ? <h3>Database is empty</h3>
           :(<Router>
                 <Switch>
+                  <Route path="/customer/login" component={BuyerLoginPage} />
+                  <Route path="/customer/registration" component={BuyerRegistrationPage} />
                   <Route path="/admin" component={Admin} />
                   <Route path="/" component={MainFrame} />
                 </Switch>

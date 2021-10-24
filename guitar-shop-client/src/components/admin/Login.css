@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 
-.adminlogin__container{
+.login-input__container{
     /* position: relative; */
     /* background-color: blue; */
     height: fit-content;
@@ -21,7 +21,7 @@
     font-weight: bold;
     font-family: 'Rampart One', cursive;
 }
-.adminlogin__container input{
+.login-input__container input{
     border: none;
     background-color: rgb(247,247,247);
     border-bottom: 2px solid black;
@@ -67,6 +67,10 @@
 }
 
 
+.signup__option{
+    display: flex;
+    gap: 0.6rem;
+}
 /* .side_nav--gap{
     gap: 0rem;
 } */

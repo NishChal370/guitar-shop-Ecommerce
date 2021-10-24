@@ -57,7 +57,7 @@ public class BuyerService {
         Buyer user = buyerRepository.findBuyerByBuyerEmail(buyer.getBuyerEmail());
 
         if (user != null) {
-            return new ResponseObject(2, "This user already  exists!");
+            return new ResponseObject(9, "This user already  exists!");
         }
 
         user = new Buyer();

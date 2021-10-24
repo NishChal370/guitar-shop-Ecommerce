@@ -11,13 +11,13 @@ import '../../admin/index.css'
 
 function ProductsListPanel({calledFrom}) {
     const {state} = useLocation();
-    console.log("PRO LISt ", state);
     const categoryState = useSelector(state => state.categoryReducer.data);
-    console.log("PRo ldit",categoryState);
 
+    
     useEffect(()=>{
-        console.log("Called after upadated");
-    },[categoryState]);
+        
+    });
+
     return (
         <div className="admin__products__list">
             <h3>Available Products</h3>
@@ -32,7 +32,7 @@ function ProductsListPanel({calledFrom}) {
                                     ? categoryInfo.products.map((product, index)=>{
                                             return(
                                                 <span className="tab-pane fade show cart--shadow">
-                                                    <ProductCart key={`featureProd${index}`} product={product} categoryId={categoryInfo.categoryId} calledFrom= {calledFrom} />
+                                                    <ProductCart key={`featureProd${index}`} product={product} categoryId={categoryInfo.categoryId} calledFrom= {calledFrom}/>
                                                 </span>
                                             )
 

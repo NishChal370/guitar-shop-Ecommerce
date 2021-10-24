@@ -35,14 +35,14 @@ public class BuyerController {
     ///-------
 
 
-    @PostMapping("/saveCustomer")
-    public Object setCustomer(@Valid @RequestBody Buyer buyer){
+    @PostMapping("/saveBuyer")
+    public Object setBuyer(@Valid @RequestBody Buyer buyer){
         return service.registration(buyer);
     }
 //
-    @GetMapping("/customer/login")
-    public Object loginCustomer(@RequestParam("customerEmail") String customerEmail,@RequestParam("customerPassword") String customerPassword){
-        return service.validate(customerEmail, customerPassword);
+    @GetMapping("/buyer/login")
+    public Object loginCustomer(@RequestParam("buyerEmail") String buyerEmail,@RequestParam("buyerPassword") String buyerPassword){
+        return service.validate(buyerEmail, buyerPassword);
     }
 
     @PutMapping("/updateBuyer/{id}")

@@ -1,12 +1,9 @@
 package com.ecommerce.guitarshop.controller;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
-
+import java.util.Collection;
 import com.ecommerce.guitarshop.model.Cart;
 import com.ecommerce.guitarshop.model.CartProduct;
-import com.ecommerce.guitarshop.model.Product;
 import com.ecommerce.guitarshop.service.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

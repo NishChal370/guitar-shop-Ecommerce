@@ -9,15 +9,18 @@ import { MdOutlineShoppingBag, MdOutlineStarBorderPurple500 } from "react-icons/
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
+import AddToCartButton from '../AddToCartButton';
 
 function ProductCart({product, calledFrom, categoryId}) {
     const history = useHistory();
+    const[isdeleted, setIsDeleted] = useState(false);
     const cartState = useSelector(state => state.cartReducer.data);
     // const [cartInfo, setCartInfo]= useState(cartState);
-    let [productQunatityInCart, setProductQunatityInCart] = useState(0);
+    // let [productQunatityInCart, setProductQunatityInCart] = useState(0);
     // let [userHaveCart, setUserHaveCart]= useState();
     let{name, price, imageOne, productQuantity, productId} = product;
 
+    // alert("CArt PRoID "+ productId);
     // for alert message using external libary
     const Toast = Swal.mixin({
         toast: true,
@@ -32,6 +35,7 @@ function ProductCart({product, calledFrom, categoryId}) {
     });
 
     const editProducthandler=()=>{
+
         history.push({
             pathname:  "/admin/products/a",
             editingProductData: {product: product, categoryId: categoryId}
@@ -60,27 +64,23 @@ function ProductCart({product, calledFrom, categoryId}) {
     }
 
     const addToCartHandler=()=>{
-        alert("Cart added--->>>");
-        productQunatityInCart +=1;
-        setProductQunatityInCart(productQunatityInCart);
-        // let existingCartId = cartInfo[cartInfo.length-1].cartId;
-        // console.log(cartInfo);
-        // console.log("CartID ",cartInfo[cartInfo.length-1].cartId);
+        // productQunatityInCart +=1;
+        // setProductQunatityInCart(productQunatityInCart);
         let existingCartId = cartState[cartState.length-1].cartId;
-        console.log(cartState);
-        console.log("CartID ",cartState[cartState.length-1].cartId);
-        console.log("productId", productId);
+        // console.log(cartState);
+        // console.log("CartID ",cartState[cartState.length-1].cartId);
+        // console.log("productId", productId);
         let cartData = {
             product: {
                 productId: productId
             },
-            quantity: productQunatityInCart
+            quantity: 1
         }
 
         addProductInCart(existingCartId, cartData);
-        console.log("<<<----Cart added");
+        // console.log("<<<----Cart added");
         // setProductQunatityInCart(productQunatityInCart);
-        alert(productQunatityInCart);
+        // alert(productQunatityInCart);
         // updateCartData();
     }
 
@@ -115,7 +115,7 @@ function ProductCart({product, calledFrom, categoryId}) {
         // console.log("-> ", userHaveCart);
         console.log(cartState);
         console.log("Cartinfo from product cart<=");
-    },[]);
+    },[isdeleted]);
 
     return (
         <div className="card">
@@ -156,7 +156,7 @@ function ProductCart({product, calledFrom, categoryId}) {
                 }
                 <h5 className="card-price">${price}</h5>
                 {(calledFrom !== "admin")
-                    ? <p className="btn bg-dark text-white" onClick={addToCartHandler}> <GiShoppingBag/>&emsp;ADD TO CART </p>
+                    ? <AddToCartButton productId={productId}/>
                     : <div className="product-quantity__continer">
                         <p>Avaible quantity: {productQuantity}</p>
                     </div>
@@ -167,7 +167,7 @@ function ProductCart({product, calledFrom, categoryId}) {
 }
 
 export default ProductCart;
-
+{/* <p className="btn bg-dark text-white" onClick={addToCartHandler}> <GiShoppingBag/>&emsp;ADD TO CART </p> */}
 
  // const fetchCartData=()=>{
     //     // Make a request for a user with a given ID
