@@ -18,6 +18,10 @@
     font-weight: bold;
 }
 
+.card:hover{
+    box-shadow: 5px 10px 18px #888888;
+}
+
 .card__caption{
     position: absolute;
     top: 0rem;
@@ -27,16 +31,25 @@
     visibility: hidden;
 }
 
+.icon--color p:hover{
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+}
+/* 
 .card__edit--button{
     text-align: right;
     padding: 0rem 1.2rem 0rem 0rem;
     color: white;
     background-color: #474747;
 }
+
+.card__edit--button:hover{
+    color: rgb(35, 35, 85);
+} */
+
 .card__edit--button p{
     /* text-align: right; */
     /* width: fit-content; */
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
 }
 
 .card__overview{
@@ -62,16 +75,17 @@
     margin-left: 1rem;
 }
 
-
+/* 
 .product-quantity__continer{
     display: flex;
     gap: 1rem;
+    
 }
 .product-quantity__continer span{
     display: flex;
     gap: 1rem;
     
-}
+} */
 
 /* .quantity__button{
     background-color: rgb(199, 198, 198);

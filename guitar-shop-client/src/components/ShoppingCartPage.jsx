@@ -1,40 +1,78 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { ImCross } from 'react-icons/im'
+import { useDispatch, useSelector } from 'react-redux';
+import { setCart } from '../redux/Action';
 
 function ShoppingCartPage() {
+    const dispatch = useDispatch();
+    const existingCartsData = useSelector(state => state.cartReducer.data);
+    const [cartsState, setCartsState] = useState(existingCartsData);
+    // let presentId
+    let cartProductList = (existingCartsData !== undefined) &&existingCartsData[existingCartsData.length-1].cartProducts;
+    
+    const fetchCartData=()=>{
+        // Make a request for a user with a given ID
+        axios.get(`http://localhost:3037/cart`)
+            .then((response) => {
+                if(response.status.toString() === '200'){
+                  dispatch(setCart(response.data))
+                  console.log("CHEK ME");
+                  console.log(response.data);
+                  console.log("CHEK ME");
+                }
+            })
+            .catch(function (error) {
+                // handle error
+                console.log("Error -> ",error);
+            });
+    }
+
+    const deleteCartProduct=()=>{
+        alert(existingCartsData.cartId);
+    }
+    useEffect(() => {
+        fetchCartData();
+    }, []);
+
+    useEffect(()=>{
+        setCartsState(...existingCartsData);
+    },[existingCartsData]);
+    
     return (
         <div className="shopping-cart__container">
-            
+            {console.log("From return->")}
+            {console.log(existingCartsData)}
+            {console.log("<-From return")}
             <div className="cart-table__container">
                 <h4>Shopping Cart</h4>
                 <table class="table shopping__table">
                     <thead>
                         <tr>
                             <th scope="col">Item</th>
+                            <th scope="col">Company</th>
                             <th scope="col">Price</th>
-                            <th scope="col">Qty</th>
-                            <th scope="col">Subtotal</th>
+                            <th scope="col">Quantity</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="table-active" style={{textAlign:"right"}}><ImCross/></td>
-                        </tr>
-                        <tr>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="table-active" style={{textAlign:"right"}}><ImCross/></td>
-                        </tr>
+                        {
+                            cartProductList.map((value, index)=>{
+                                return(
+                                    <>
+                                        <tr>
+                                            <td>{value.product.name}</td>
+                                            <td>{value.product.productCompany}</td>
+                                            <td>{value.product.price}</td>
+                                            <td>{value.product.productQuantity}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="table-active" style={{textAlign:"right"}} onClick={deleteCartProduct}><ImCross/></td>
+                                        </tr>
+                                    </>
+                                )
+                            })
+                        }
                     </tbody>
                 </table>
             </div>

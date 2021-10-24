@@ -71,11 +71,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6a6 74%);
     cursor: pointer;
 }
 
-/* .side__nav__list li:hover{
-    color: blue;
-} */
-
-
 .add-product__form{
     text-align: left;
     /* background-color: rgba(157, 128, 184, 0.411); */

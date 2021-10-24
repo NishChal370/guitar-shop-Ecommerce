@@ -1,6 +1,7 @@
 export const SET_CATEGORY = 'SET_CATEGORY';
 export const SET_PRODUCT = 'SET_PRODUCT';
 export const SET_ADMIN = 'SET_ADMIN';
+export const SET_CART = 'SET_CART';
 
 const setCategory=(data)=>{
     return{
@@ -25,5 +26,12 @@ const setAdmin=(data)=>{
     }
 }
 
+const setCart=(data)=>{
+    return{
+        type: SET_CART,
+        payload: data
+    }
+}
 
-export {setCategory, setProduct, setAdmin}
+
+export {setCategory, setProduct, setAdmin, setCart}

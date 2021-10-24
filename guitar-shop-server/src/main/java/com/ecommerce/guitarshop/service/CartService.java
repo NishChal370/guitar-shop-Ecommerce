@@ -9,10 +9,13 @@ import com.ecommerce.guitarshop.dao.CartRepository;
 import java.util.*;
 import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
+@Transactional
 public class CartService {
 
     @Autowired
@@ -101,16 +104,23 @@ public class CartService {
         return existingCart.getCartProducts();
     }
 
-    public String deleteById(long id){
-        cartRepository.deleteById(id);
-
-        return "ID: "+id+" deleted";
+    public String deleteCartProductById(Long cartId,Long productId){
+//        cartRepository.deleteById(id);.deleteCartProductById(new CartProductId(cartId, productId))
+//        cartProductRepository.
+        cartProductRepository.deleteByCartProductId(new CartProductId(cartId, productId));
+        return "Cart deleted";
     }
+
+//    public String deleteById(long id){
+//        cartRepository.deleteById(id);
+//
+//        return "ID: "+id+" deleted";
+//    }
 
     public String deleteAll(){
         cartRepository.deleteAll();
 
-        return "All Admin deleted";
+        return "All Cart deleted";
     }
 
 }

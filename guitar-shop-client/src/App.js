@@ -6,12 +6,13 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import './App.css';
 import Admin from './components/admin/Index';
 import MainFrame from './components/MainFrame';
-import { setCategory, setProduct } from './redux/Action';
+import { setCart, setCategory, setProduct } from './redux/Action';
 
 function App() {
 
   const dispatch = useDispatch();
   const categoryProductState = useSelector(state => state.categoryReducer.data);
+  const cartState = useSelector(state => state.cartReducer.data);
 
   const fetchCategoryData=()=>{
     // Make a request for a user with a given ID
@@ -48,10 +49,31 @@ function App() {
 
   }
 
+  const fetchCartData=()=>{
+    // Make a request for a user with a given ID
+    axios.get(`http://localhost:3037/cart`)
+        .then((response) => {
+            if(response.status.toString() === '200'){
+              dispatch(setCart(response.data))
+            }
+        })
+        .catch(function (error) {
+            // handle error
+            console.log("Error -> ",error);
+        });
+}
+
+
   useEffect(()=>{
     fetchCategoryData();
     fetchProductData();
+    // fetchCartData();
+  },[]);
+
+  useEffect(()=>{
+    fetchCartData();
   },[])
+
 console.log("first")
   console.log(categoryProductState)
   console.log("first")

@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class BuyerController {
@@ -24,10 +26,23 @@ public class BuyerController {
         return service.getById(id);
     }
 
-    @PostMapping("/saveBuyer")
-    public ResponseEntity<Buyer> setBuyer(@RequestBody Buyer buyer){
-        return new ResponseEntity<Buyer>(
-                service.save(buyer), HttpStatus.CREATED);
+    //----
+//    @PostMapping("/saveBuyer")
+//    public ResponseEntity<Buyer> setBuyer(@RequestBody Buyer buyer){
+//        return new ResponseEntity<Buyer>(
+//                service.save(buyer), HttpStatus.CREATED);
+//    }
+    ///-------
+
+
+    @PostMapping("/saveCustomer")
+    public Object setCustomer(@Valid @RequestBody Buyer buyer){
+        return service.registration(buyer);
+    }
+//
+    @GetMapping("/customer/login")
+    public Object loginCustomer(@RequestParam("customerEmail") String customerEmail,@RequestParam("customerPassword") String customerPassword){
+        return service.validate(customerEmail, customerPassword);
     }
 
     @PutMapping("/updateBuyer/{id}")

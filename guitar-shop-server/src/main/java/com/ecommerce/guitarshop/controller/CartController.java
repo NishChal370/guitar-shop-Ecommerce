@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class CartController {
@@ -49,9 +51,12 @@ public class CartController {
         return service.updateCartProductById(id, cartProduct);
     }
 
-    @DeleteMapping("/deleteCartById/{id}")
-    public String deleteCart(@PathVariable Long id){
-        return service.deleteById(id);
+    @DeleteMapping("/deleteCartById/cartId={cartId}/productId={productId}")
+    public String deleteCart(@PathVariable Long cartId, @PathVariable Long productId){
+//        return service.delet eById(id);
+//        return service.deleteCartProductById(cartId,productId);
+
+        return service.deleteCartProductById(cartId, productId);
     }
 
     @DeleteMapping("/deleteCart")

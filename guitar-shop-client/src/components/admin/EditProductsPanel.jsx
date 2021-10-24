@@ -175,7 +175,6 @@ function EditProductsPanel() {
         if(editingProductData !== undefined){
             let{product, categoryId} = editingProductData;
             let{name, detail, feature, type, price, productCompany, productQuantity, imageOne, imageTwo, imageThree} = product;
-
             initialInputData={
                 name: name,
                 detail: detail,
