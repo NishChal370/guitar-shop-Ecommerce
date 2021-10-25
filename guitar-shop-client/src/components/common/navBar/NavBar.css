@@ -3,15 +3,11 @@
 }
 .nav-link{
     color: rgb(19, 18, 18);
-    /* padding: 0rem; */
 }
 
 .nav-link--padding{
     padding: 0rem;
 }
-/* .nav-login-container{
-    display: flex;
-} */
 
 .nav-logo--size{
     margin: 0rem;

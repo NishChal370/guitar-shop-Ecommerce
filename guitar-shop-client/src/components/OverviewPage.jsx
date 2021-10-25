@@ -1,14 +1,16 @@
 import React from 'react'
-import { GiProgression, GiSelfLove, GiShoppingBag } from 'react-icons/gi';
-import { MdOutlineStarBorderPurple500 } from 'react-icons/md';
-import { useHistory, useLocation } from 'react-router'
-import { ImFacebook2, ImMail } from "react-icons/im";
 import { FaTwitterSquare } from "react-icons/fa";
+import { ImFacebook2, ImMail } from "react-icons/im";
+import { useLocation } from 'react-router';
+import { GiProgression, GiSelfLove } from 'react-icons/gi';
+import { MdOutlineStarBorderPurple500 } from 'react-icons/md';
+
 import '../index.css'
 import AddToCartButton from './common/AddToCartButton';
+
 function OverviewPage() {
     const {state} = useLocation();
-    const history = useHistory();
+
     const productInfo = state.product;
     return (
         <div className="overview__container">
@@ -32,17 +34,7 @@ function OverviewPage() {
                 <p className="product__price">${productInfo.price}</p>
                 <hr/>
                 <div className="addCart__container"> 
-                    {/* <div className="addCart">
-                        <div className="addCart__button">
-                            <span>-</span>
-                        </div>
-                        <input type="text"/>
-                        <div  className="addCart__button">
-                            <span>+</span>
-                        </div>
-                    </div> */}
                     <AddToCartButton productId={productInfo.productId}/>
-                    {/* <p className="btn bg-dark text-white  btn--margin"><GiShoppingBag/>&emsp;ADD TO CART</p> */}
                 </div>
                 <hr/>
                 <div className="love-progress__container">

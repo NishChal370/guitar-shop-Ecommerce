@@ -1,16 +1,16 @@
 package com.ecommerce.guitarshop.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotEmpty;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Entity
 @Data
-@AllArgsConstructor
+@Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "buyer", schema = "guitar_shop")
 public class Buyer {
     @Id

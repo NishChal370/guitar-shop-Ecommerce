@@ -1,10 +1,9 @@
 package com.ecommerce.guitarshop.model;
 
 import lombok.*;
-import java.util.List;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Data
 @Entity
@@ -17,8 +16,6 @@ public class Orders {
     private long ordersId;
 
     private double totalPrice;
-
-
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paymentId")
@@ -35,7 +32,3 @@ public class Orders {
     @JsonBackReference(value = "orders-cart")
     public Cart cart;
 }
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orders",  fetch = FetchType.LAZY)
-//    @JsonManagedReference(value =  "cart-orders")
-//    private List<Cart> cart;

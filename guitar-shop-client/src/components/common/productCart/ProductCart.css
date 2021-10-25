@@ -6,7 +6,6 @@
 
 .card-img-top{
     position: relative;
-    /* border: 2px solid var(--border-color); */
     height: 16rem;
     overflow: hidden;
     object-fit: contain;
@@ -23,40 +22,23 @@
 }
 
 .card__caption{
-    position: absolute;
     top: 0rem;
     width: 100%;
     height: 80%;
     overflow: hidden;
     visibility: hidden;
+    position: absolute;
 }
 
 .icon--color p:hover{
     text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
 }
-/* 
-.card__edit--button{
-    text-align: right;
-    padding: 0rem 1.2rem 0rem 0rem;
-    color: white;
-    background-color: #474747;
-}
-
-.card__edit--button:hover{
-    color: rgb(35, 35, 85);
-} */
-
-.card__edit--button p{
-    /* text-align: right; */
-    /* width: fit-content; */
-    /* background-color: blueviolet; */
-}
 
 .card__overview{
-    background-color: #474747;
     color: white;
-    padding: 0.6rem 0rem 0.6rem 0rem;
     margin-top: 60%;
+    background-color: #474747;
+    padding: 0.6rem 0rem 0.6rem 0rem;
 }
 
 .overview--height{
@@ -64,33 +46,13 @@
 }
 
 .card:hover .card__caption{
-    visibility: visible;
     cursor: pointer;
+    visibility: visible;
 }
 
 .cart__icons{
-    font-size: 2rem;
-    display: flex;
     gap: 2rem;
+    display: flex;
+    font-size: 2rem;
     margin-left: 1rem;
 }
-
-/* 
-.product-quantity__continer{
-    display: flex;
-    gap: 1rem;
-    
-}
-.product-quantity__continer span{
-    display: flex;
-    gap: 1rem;
-    
-} */
-
-/* .quantity__button{
-    background-color: rgb(199, 198, 198);
-    border-radius: 6px;
-    margin-bottom: 4rem;
-
-}
- */

@@ -1,16 +1,16 @@
 package com.ecommerce.guitarshop.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Embeddable;
 import java.io.Serializable;
+import javax.persistence.Embeddable;
 
 @Data
+@Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
-@Embeddable
 public class CartProductId implements Serializable {
     private Long cartId;
     private Long productId;

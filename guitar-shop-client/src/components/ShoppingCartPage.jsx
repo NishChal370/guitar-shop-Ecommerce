@@ -1,27 +1,26 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { ImCross, ImMinus, ImPlus } from 'react-icons/im'
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import Swal from 'sweetalert2';
+import { ImCross, ImMinus, ImPlus } from 'react-icons/im';
+
 import { setCart } from '../redux/Action';
-import { GrFormSubtract } from "react-icons/gr";
 
 function ShoppingCartPage() {
     const dispatch = useDispatch();
+    let [totalPrice, setTotalPrice] = useState(0);
+    const [cartsState, setCartsState] = useState(existingCartsData);
     const [isCartProductDeleted, setIsCartProductDeleted] = useState(false);
     const existingCartsData = useSelector(state => state.cartReducer.data);
-    const [cartsState, setCartsState] = useState(existingCartsData);
-    let [totalPrice, setTotalPrice] = useState(0);
     let presentingCartId = (existingCartsData !== undefined) && existingCartsData[existingCartsData.length-1].cartId;
     let cartProductList = (existingCartsData !== undefined) && existingCartsData[existingCartsData.length-1].cartProducts;
     
-    let [qunatity, setQunatity] = useState(1);
     const calculateOrderTotal=()=>{
         cartProductList.map((value, index)=>{
             totalPrice += value.product.price;
         });
         setTotalPrice(totalPrice);
-        console.log("TOTAL PRICE -> ", totalPrice);
     }
 
     // for alert message using external libary
@@ -43,9 +42,6 @@ function ShoppingCartPage() {
             .then((response) => {
                 if(response.status.toString() === '200'){
                   dispatch(setCart(response.data))
-                  console.log("CHEK ME");
-                  console.log(response.data);
-                  console.log("CHEK ME");
                 }
             })
             .catch(function (error) {
@@ -55,10 +51,8 @@ function ShoppingCartPage() {
     }
 
     const deleteCartProduct=(productId, deletingProductPrice)=>{
-        alert("CartID"+ presentingCartId +"ProductID"+ productId);
         axios.delete(`http://localhost:3037/deleteCartById/cartId=${presentingCartId}/productId=${productId}`)
             .then((response) => {
-                console.log('DELETED '+ response);
                 totalPrice -= deletingProductPrice;
                 setTotalPrice(totalPrice);
                 setIsCartProductDeleted(true);
@@ -109,8 +103,6 @@ function ShoppingCartPage() {
                                         <td>{value.quantity}</td>
                                     </tr>
                                     <tr key={`cartprodRow2${index}`}>
-                                        {/* <td colspan="4" class="table-active" style={{textAlign:"right"}} onClick={()=>deleteCartProduct(value.product.productId, value.product.price)}><GrFormSubtract/></td>
-                                        <td colspan="4" class="table-active" style={{textAlign:"right"}} onClick={()=>deleteCartProduct(value.product.productId, value.product.price)}><RiAddFill/></td> */}
                                         <td colspan="4" class="table-active table--button">
                                             <span><ImPlus/></span>
                                             <span>&nbsp;&nbsp;</span>
@@ -131,7 +123,7 @@ function ShoppingCartPage() {
                 <hr/>
                 <section className="shipping__container">
                     <p>ESTIMATE SHIPPING AND TAX</p>
-                    <div>
+                    <div style={{display:"flex", gap:'1rem'}}>
                         <label htmlFor="country">Country</label>
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -140,16 +132,7 @@ function ShoppingCartPage() {
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                 <li><button class="dropdown-item" type="button">Nepal</button></li>
                             </ul>
-                        </div>
-                        <span className="input--flex" style={{display: "flex"}}>
-                            <p>State/Province</p>
-                            <input type="text" />
-                        </span>
-                        <span className="input--flex">
-                            <label htmlFor="zip">Zip</label>
-                            <input type="text" />
-                        </span>
-                        
+                        </div>                        
                     </div>
                 </section>
                 <hr/>

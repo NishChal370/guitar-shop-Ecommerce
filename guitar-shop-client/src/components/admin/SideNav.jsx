@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { NavLink } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoDiffAdded, GoDiffRemoved } from "react-icons/go";
 
 import { setCategory } from '../../redux/Action';
-import { NavLink } from 'react-router-dom';
 
-// function SideNav({changeSelectedProduct}) {
 function SideNav() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -114,7 +113,6 @@ function SideNav() {
                 <ul className="side__nav__list">
                     {(categoryProductState !== undefined) && availableCateogaryList.map((cateogary, index)=>{
                         return <NavLink className="nav-link nav-link--padding" key={`catogaryNav${index}`} exact to={{pathname:"/admin/products/p", state: cateogary}}>{cateogary}</NavLink>
-                        // <li key={`catogaryNav${index}`} onClick={()=>changeSelectedProduct(cateogary)}>{cateogary}</li>
                     })}                 
                 </ul>
             </section>
@@ -126,9 +124,7 @@ function SideNav() {
                     <ul className="side__nav__list">
                         <li onClick={()=>history.push({pathname:  "/admin/products/a"})}>Add Products</li>
                         <li onClick={editCateogaryHandler}>Edit cateogary</li>
-                        {(isAddingCateogary)&& <li className="add-cateogary__field"><input type="text"  value={cateogaryInput.categoryName} onChange={changeCateogaryInputHandler} /><p onClick={saveCateogary}><GoDiffAdded/></p> <p onClick={deleteCateogaryHandler}><GoDiffRemoved/></p></li>}
-                        {/* <li onClick={()=>history.push({pathname:  "/admin/products/editProduct", state: {fetch:"adminById" }})}>My Account</li> */}
-                        
+                        {(isAddingCateogary)&& <li className="add-cateogary__field"><input type="text"  value={cateogaryInput.categoryName} onChange={changeCateogaryInputHandler} /><p onClick={saveCateogary}><GoDiffAdded/></p> <p onClick={deleteCateogaryHandler}><GoDiffRemoved/></p></li>}                        
                         <li onClick={()=>history.push({pathname: "/admin/products/profile", state: {id: adminState[0].adminId, fetch:"adminById" }})}>My Account</li>
                     </ul>
                 </section>

@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "payment", schema = "guitar_shop")
 public class Payment {
     @Id

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import React from 'react'
-import { useSelector } from 'react-redux';
-import { GiShoppingBag, GiSelfLove } from 'react-icons/gi'
+import React from 'react';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
+import { GiShoppingBag } from 'react-icons/gi'
 
 function AddToCartButton({productId}) {
     const cartState = useSelector(state => state.cartReducer.data);
@@ -22,13 +22,7 @@ function AddToCartButton({productId}) {
 
     const addToCartHandler=()=>{
         if(cartState.length >= 1){
-            alert("pro id-> ",productId);
-            // productQunatityInCart +=1;
-            // setProductQunatityInCart(productQunatityInCart);
             let existingCartId = cartState[cartState.length-1].cartId;
-            // console.log(cartState);
-            // console.log("CartID ",cartState[cartState.length-1].cartId);
-            // console.log("productId", productId);
             let cartData = {
                 product: {
                     productId: productId
@@ -41,11 +35,6 @@ function AddToCartButton({productId}) {
         else{
             alert("Please Login !!");
         }
-        
-        // console.log("<<<----Cart added");
-        // setProductQunatityInCart(productQunatityInCart);
-        // alert(productQunatityInCart);
-        // updateCartData();
     }
 
     const addProductInCart=(existingCartId, cartData)=>{
@@ -63,8 +52,6 @@ function AddToCartButton({productId}) {
             })
             .catch(function (error) {
                 // handle error
-                console.log("Error -> from cart ",error);
-                alert("Cart existto update please click on overview");
                 Toast.fire({
                     icon: 'error',
                     title: "Product already added in cart. To update please click on overview"

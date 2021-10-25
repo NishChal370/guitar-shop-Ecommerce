@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.transaction.Transactional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -30,8 +29,6 @@ public class CartController {
 
     @PostMapping("/saveCart")
     public ResponseEntity<Cart> setCart(@RequestBody Cart cart){
-        System.out.println("ME called");
-        System.out.println(cart);
         return new ResponseEntity<Cart>(
                 service.save(cart), HttpStatus.CREATED);
     }
@@ -44,14 +41,12 @@ public class CartController {
 
     @PatchMapping("/updateCartProductsById/{id}")
     public String updateCartProductsById(@PathVariable Long id, @RequestBody CartProduct cartProduct){
-        System.out.println("IN side");
+
         return service.updateCartProductById(id, cartProduct);
     }
 
     @DeleteMapping("/deleteCartById/cartId={cartId}/productId={productId}")
     public String deleteCart(@PathVariable Long cartId, @PathVariable Long productId){
-//        return service.delet eById(id);
-//        return service.deleteCartProductById(cartId,productId);
 
         return service.deleteCartProductById(cartId, productId);
     }

@@ -21,6 +21,7 @@ let initialInputData={
     }
 
 };
+
 let emptyInputData={
     name:"",
     detail:"",
@@ -40,10 +41,11 @@ let emptyInputData={
 
 function EditProductsPanel() {
     const  { editingProductData } = useLocation();
-
+    const categoryState = useSelector(state => state.categoryReducer.data);
+    
     let [ inputData, setInputData ] = useState(initialInputData);
     let [inputImage, setinputImage] = useState({imageOne: ""});
-    const categoryState = useSelector(state => state.categoryReducer.data);
+    
 
     const cateogariesList = (categoryState !== undefined) && categoryState.map((cateogary)=>{
         return cateogary.categoryName
@@ -99,6 +101,7 @@ function EditProductsPanel() {
             setInputData(emptyInputData);
         }
     };
+
     // editingProductData
     const updateProduct=(formData)=>{
         let { productId } = editingProductData.product;
@@ -129,9 +132,9 @@ function EditProductsPanel() {
     };
 
     const isInputFilesEmpty=()=>{
-        let{name, detail, feature, type, price, productCompany, productQuantity, category} = inputData;
         let isEmpty = true;
         let emptyFiled = '';
+        let{name, detail, feature, type, price, productCompany, productQuantity, category} = inputData;
         if(name === ''){
             emptyFiled = "Cateogary";
         }
@@ -267,9 +270,7 @@ function EditProductsPanel() {
                         <input type="text" className="form-control" id="inputPrice" name="price" value={inputData.price} onChange={inputchangeHandler}/>
                     </div>
                 </div>
-                {/* <div className="col-8"> */}
-                    <button type="submit" className="btn btn-primary">Save Product</button>
-                {/* </div> */}
+                <button type="submit" className="btn btn-primary">Save Product</button>
             </form>
         </div>
     )

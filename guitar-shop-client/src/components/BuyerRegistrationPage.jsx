@@ -1,8 +1,7 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import React, { useState } from 'react'
 import { useHistory } from 'react-router';
-import Swal from 'sweetalert2';
-
 
 let initialInput ={
     buyerName: "",
@@ -12,7 +11,6 @@ let initialInput ={
     buyerPassword: ""
 }
 
-
 function BuyerRegistrationPage() {
     const history = useHistory();
     const [inputData, setInputData] = useState(initialInput);
@@ -20,7 +18,6 @@ function BuyerRegistrationPage() {
     const submitHandler=(e)=>{
         e.preventDefault();
         registerBuyer();
-        
     }
     
     const changeHandler=(e)=>{
@@ -64,8 +61,8 @@ function BuyerRegistrationPage() {
                 }
             })
             .catch(function (error) {
-            // handle error
-            console.log("Error -> ",error);
+                // handle error
+                console.log("Error -> ",error);
             });
     }
 

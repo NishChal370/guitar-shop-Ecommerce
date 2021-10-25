@@ -105,17 +105,10 @@ public class CartService {
     }
 
     public String deleteCartProductById(Long cartId,Long productId){
-//        cartRepository.deleteById(id);.deleteCartProductById(new CartProductId(cartId, productId))
-//        cartProductRepository.
         cartProductRepository.deleteByCartProductId(new CartProductId(cartId, productId));
+
         return "Cart deleted";
     }
-
-//    public String deleteById(long id){
-//        cartRepository.deleteById(id);
-//
-//        return "ID: "+id+" deleted";
-//    }
 
     public String deleteAll(){
         cartRepository.deleteAll();

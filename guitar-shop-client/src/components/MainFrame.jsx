@@ -1,16 +1,12 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
-// import Home from './home/HomePage'
-import Footer from './common/footer/Footer'
-import NavBar from './common/navBar/NavBar'
-// import ProductsPanel from './ProductsPage'
-// import OverviewPanel from './OverviewPage'
-// import ShoppingCartPanel from './ShoppingCartPage'
+import HomePage from './home/HomePage'
 import OverviewPage from './OverviewPage'
 import ProductsPage from './ProductsPage'
+import Footer from './common/footer/Footer'
+import NavBar from './common/navBar/NavBar'
 import ShoppingCartPage from './ShoppingCartPage'
-import HomePage from './home/HomePage'
 
 function MainFrame() {
     return (

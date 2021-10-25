@@ -1,22 +1,16 @@
 import React, { useState } from 'react'
 
 import './NavBar.css'
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { GiLoveHowl } from "react-icons/gi";
 import { MdOutlineShoppingBag } from "react-icons/md";
-import { NavLink } from 'react-router-dom';
 
 function NavBar({calledFrom}) {
     let history = useHistory();
     const categoryState = useSelector(state => state.categoryReducer.data);
     const cartState = useSelector(state => state.cartReducer.data);
-
-    console.log("FROM NAV", cartState);
-    // const directToSignUpPage=()=>{
-    //     // history.push({pathname:'/customer/signup', state:{formType: formType}})
-    //     history.push('/customer/registration');
-    // }
 
     const directToCartPage=()=>{
         if(cartState.length >= 1){
@@ -34,7 +28,7 @@ function NavBar({calledFrom}) {
                 </figure>
 
                 {
-                (calledFrom !== "admin") // will only show when called fro user
+                (calledFrom !== "admin") // will only show when called from user
                     &&  <div>
                             <section>
                                 <ul className="nav justify-content-end">
@@ -60,21 +54,13 @@ function NavBar({calledFrom}) {
                             <section>
                                 <ul className="nav justify-content-end">
                                     <li className="nav-item">
-                                    <NavLink className="nav-link"  exact to="/">HOME</NavLink>
-                                        {/* <a className="nav-link active" aria-current="page" onClick={()=> history.push("/")}>HOME</a> */}
+                                        <NavLink className="nav-link"  exact to="/">HOME</NavLink>
                                     </li>
                                     
                                     {(categoryState !== undefined) && categoryState.map((value, index)=>{
                                         return(
                                             <li key={`navCateog ${index}`} className="nav-item dropdown">
                                                 <NavLink className="nav-link dropdown-toggle"  exact to={{pathname:"/products/p", state: value.categoryName}}>{(value.categoryName !== null) && value.categoryName.toUpperCase()}</NavLink>
-                                                {/* <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" onClick={()=>changeSelectedProductHandler(value.categoryName)} role="button" aria-expanded="false">{(value.categoryName !== null) && value.categoryName.toUpperCase()}</a>
-                                                <ul className="dropdown-menu">
-                                                    <li><p className="dropdown-item" href="...">Third</p></li>
-                                                    <li><p className="dropdown-item" href="...">Fourth</p></li>
-                                                    <li><hr className="dropdown-divider"/></li>
-                                                    <li><p className="dropdown-item" href="...">Fifth</p></li>
-                                                </ul> */}
                                             </li>
                                         )
                                     })}

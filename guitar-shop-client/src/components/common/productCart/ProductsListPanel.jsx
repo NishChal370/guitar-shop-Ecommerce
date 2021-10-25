@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
-// import ProductCart from '../common/productCart/ProductCart';
-import ProductCart from './ProductCart';
 
-// import "./index.css"
-
-// import '../admin/index.css'
 import '../../admin/index.css'
+import ProductCart from './ProductCart';
 
 function ProductsListPanel({calledFrom}) {
     const {state} = useLocation();
     const categoryState = useSelector(state => state.categoryReducer.data);
-
-    
-    useEffect(()=>{
-        
-    });
 
     return (
         <div className="admin__products__list">

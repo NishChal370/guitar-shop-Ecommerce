@@ -1,19 +1,18 @@
+import './Login.css'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useHistory } from 'react-router';
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-
-import './Login.css'
 import { setAdmin } from '../../redux/Action';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function Login() {
-    const dispatch =  useDispatch();
-    const adminState = useSelector(state => state.adminReducer.data);
-    const [isFormSubmitted, setFormSubmitted] = useState(false);
-    const [adminInfo, setAdminInfo] = useState({email:"", password:""})
     let history = useHistory();
+    const dispatch =  useDispatch();
+    const [isFormSubmitted, setFormSubmitted] = useState(false);
+    const [adminInfo, setAdminInfo] = useState({email:"", password:""});
+    const adminState = useSelector(state => state.adminReducer.data);
 
     const changeInputHandler=(e)=>{
         let fieldName = e.target.type

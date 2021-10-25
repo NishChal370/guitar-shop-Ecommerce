@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
-import { Route, Switch, useHistory } from 'react-router';
-// import ProductsList from './admin/ProductsList';
-import SideNavBar from './common/navBar/SideNavBar';
-import ProductsListPanel from './common/productCart/ProductsListPanel';
-// import ProductsList from './common/productCart/ProductsList';
-import ProfilePanel from './common/profile/ProfilePanel';
+import { Route, Switch } from 'react-router';
+
 import "./index.css"
+import SideNavBar from './common/navBar/SideNavBar';
+import ProfilePanel from './common/profile/ProfilePanel';
+import ProductsListPanel from './common/productCart/ProductsListPanel';
 
 function ProductsPage() {
-    const history = useHistory();
     let  [selectedProductName, setSelectedProductName]= useState("Guitar");
 
     const getSelectedProductNameHandler=(name)=>{

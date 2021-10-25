@@ -1,18 +1,18 @@
 footer{
-    background-color: rgb(37,37,37);
+    height: 200%;
     color: white;
     text-align: left;
-    height: 200%;
     padding-top: 1rem;
+    background-color: rgb(37,37,37);
 }
 
 
 .footer__top{
     display: flex;
-    align-content: space-between;
     font-size: 1rem;
-    border-bottom: 1px solid var(--border-color);
     margin-bottom: 2rem;
+    align-content: space-between;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .footer__top article:nth-child(1){

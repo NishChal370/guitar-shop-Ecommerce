@@ -3,34 +3,34 @@
 }
 
 .item{
-    background-repeat: no-repeat;
-    background-size:cover;
-    min-height:339px;
-    display: inline-block;
     width: 100%;
+    color: white;
+    min-height:339px;
     text-align:center;     
     padding: 16% 24%;
-    color: white;
+    background-size:cover;
+    display: inline-block;
+    background-repeat: no-repeat;
 }
 
 .row{
     margin: 0;
     display: flex;
 }
+
 .row--padding{
     padding : 0;
 }
-
 
 .container--top-margin{
     margin-top: 4rem;
 }
 
 .sample-scroll__button{
-    display: flex;
     gap: 0.6rem;
-    justify-content: right;
+    display: flex;
     margin: 1rem 3rem;
+    justify-content: right;
 }
 
 .sample-scroll__button input{
@@ -38,20 +38,20 @@
     height: 0.8rem;
     cursor: pointer;
 }
-/* style={{display:"flex", gap:"0.6rem", justifyContent:"center", margin:"1rem 3rem"}} */
+
 .sample-scroll__button--featured{
     justify-content: center;
 }
-/* style={{ width: "1.6em", height: "1.6em" }} */
+
 .sample-scroll__button--featured input{
     width: 1.6rem;
     height: 1.6rem;
 }
 
 .featured__container{
-    background-color: #E0E2E3;
     padding-top: 10rem;
     padding-bottom: 6rem;
+    background-color: #E0E2E3;
 }
 
 .featured__container-product{
@@ -71,15 +71,15 @@
 }
 
 blockquote{
-    background-color: #0088CC;
-    border-radius: 10px;
     padding: 20px;
     color: white;
+    border-radius: 10px;
+    background-color: #0088CC;
 }
 
 .products__container section{
-    text-align: left;
     display: flex;
+    text-align: left;
     margin-left: 4rem;
     justify-content: space-between;
 }

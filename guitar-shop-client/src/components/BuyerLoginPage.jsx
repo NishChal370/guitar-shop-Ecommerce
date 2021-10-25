@@ -1,14 +1,15 @@
 import axios from 'axios';
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { setCart } from '../redux/Action';
 
 let initialInput ={
     buyerEmail: "",
     buyerPassword: ""
 }
+
 function BuyerLoginPage() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -24,7 +25,6 @@ function BuyerLoginPage() {
         e.preventDefault();
         
         loginBuyer();
-        
     }
 
     // for alert message using external libary
@@ -45,24 +45,18 @@ function BuyerLoginPage() {
         axios.get(`http://localhost:3037/buyer/login?buyerEmail=${inputData.buyerEmail}&buyerPassword=${inputData.buyerPassword}`)
             .then((response) => {
             // handle success
-                console.log("Login");
-                console.log(response);
                 if(response.data.status === 0){
-                    alert(response.data.statusMessage)
                     Toast.fire({
                         icon: 'error',
                         title: response.data.statusMessage
                     });
-                    
                 }
                 else{
                     Toast.fire({
                         icon: 'success',
                         title: 'Welcome'
                     });
-                    console.log("loginkdsfkjsdnkfjsndkjfnskjdfnkjsdn");
-                    console.log(response.data[0].buyerId);
-                    console.log("loginkdsfkjsdnkfjsndkjfnskjdfnkjsdn");
+
                     let cart ={
                         cartProducts:[],
                         buyer:{buyerId:response.data[0].buyerId}
@@ -72,8 +66,8 @@ function BuyerLoginPage() {
                 }
             })
             .catch(function (error) {
-            // handle error
-            console.log("Error -> ",error);
+                // handle error
+                console.log("Error -> ",error);
             });
     }
 
@@ -83,8 +77,7 @@ function BuyerLoginPage() {
         axios.post(`http://localhost:3037/saveCart`,cart)
             .then((response) => {
                 if(response.status.toString() === '200'){
-                dispatch(setCart(response.data))
-
+                    dispatch(setCart(response.data))
                 }
             })
             .catch(function (error) {

@@ -5,16 +5,15 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import './App.css';
 import Admin from './components/admin/Index';
+import MainFrame from './components/MainFrame';
 import BuyerLoginPage from './components/BuyerLoginPage';
 import BuyerRegistrationPage from './components/BuyerRegistrationPage';
-import MainFrame from './components/MainFrame';
 import { setCart, setCategory, setProduct } from './redux/Action';
 
 function App() {
 
   const dispatch = useDispatch();
   const categoryProductState = useSelector(state => state.categoryReducer.data);
-  const cartState = useSelector(state => state.cartReducer.data);
 
   const fetchCategoryData=()=>{
     // Make a request for a user with a given ID
@@ -69,16 +68,9 @@ function App() {
   useEffect(()=>{
     fetchCategoryData();
     fetchProductData();
-    // fetchCartData();
+    fetchCartData();
   },[]);
 
-  useEffect(()=>{
-    fetchCartData();
-  },[])
-
-console.log("first")
-  console.log(categoryProductState)
-  console.log("first")
   return (
   <div className="App">
     {(categoryProductState === undefined )

@@ -1,11 +1,10 @@
 package com.ecommerce.guitarshop.mapper;
 
-import com.ecommerce.guitarshop.dto.LoginDto;
-import com.ecommerce.guitarshop.model.Admin;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-
-import java.util.List;
+import com.ecommerce.guitarshop.dto.LoginDto;
+import com.ecommerce.guitarshop.model.Admin;
 
 @Mapper(componentModel = "spring")
 public interface LoginMapper {

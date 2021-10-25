@@ -9,10 +9,6 @@ function ProfilePanel() {
     const  { state} = useLocation();
     const [profile, setProfile] = useState();
     const adminState = useSelector(state => state.adminReducer.data);
-    console.log("admin",adminState);
-    console.log("stat ",state);
-    console.log("prof ",profile);
-    // const[profile, setProfile] = useState();
 
     const fetchUserProfile=()=>{
         // Make a request for a user with a given ID
@@ -28,11 +24,12 @@ function ProfilePanel() {
                 console.log("Error -> ",error);
             });
     }
+
     useEffect(()=>{
         setProfile(adminState);
         fetchUserProfile();
     },[])
-    console.log(profile);
+
     return (
         <>
         {(profile !== undefined) && (
@@ -47,8 +44,6 @@ function ProfilePanel() {
                         <span className="personal-info__container">
                             <p><span style={{fontSize:"2rem",fontWeight:"bolder"}}>First Name:</span> {profile.adminFirstName}</p>
                             <p><span style={{fontSize:"2rem",fontWeight:"bolder"}}>Last Name: </span>{profile.adminLastName}</p>
-                        
-                            {/* <p>Email: {profile.adminEmail}</p> */}
                             <p><span style={{fontSize:"2rem",fontWeight:"bolder"}}>Password: </span>{profile.adminPassword}</p>
                             <p><span style={{fontSize:"2rem",fontWeight:"bolder"}}>Email: </span>{profile.adminEmail}</p>
                         </span>
@@ -66,11 +61,3 @@ function ProfilePanel() {
 }
 
 export default ProfilePanel
-
-
-
-// <p>adminFirstName: {profile.adminFirstName}</p>
-//                     <p>adminLastName: {profile.adminLastName}</p>
-//                     <p>adminEmail: {profile.adminEmail}</p>
-//                     <p>adminPassword: {profile.adminPassword}</p>
-//                     <p>adminUserName: {profile.adminUserName}</p>

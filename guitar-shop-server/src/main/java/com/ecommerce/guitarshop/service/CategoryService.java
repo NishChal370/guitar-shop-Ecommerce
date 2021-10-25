@@ -1,15 +1,14 @@
 package com.ecommerce.guitarshop.service;
-
-import com.ecommerce.guitarshop.dao.CategoryRepository;
 import com.ecommerce.guitarshop.model.Category;
-import java.util.List;
-
 import com.ecommerce.guitarshop.model.Product;
+import com.ecommerce.guitarshop.dao.CategoryRepository;
+
+import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.persistence.EntityNotFoundException;
 
 @Service
 public class CategoryService {

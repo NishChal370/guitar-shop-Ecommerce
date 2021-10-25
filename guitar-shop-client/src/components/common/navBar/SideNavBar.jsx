@@ -20,7 +20,6 @@ function SideNavBar({getSelectedProductName}) {
                     {(categoryProductState !== undefined) && availableCateogaryList.map((cateogary, index)=>{
                         console.log(cateogary);
                         return <NavLink className="nav-link nav-link--padding" key={`catogaryNav${index}`} exact to={{pathname:"/products/p", state: cateogary}} onClick={()=>{getSelectedProductName(cateogary)}}>{cateogary}</NavLink>
-                        // <li key={`catogaryNav${index}`}  onClick={()=>changeSelectedProduct(cateogary)}>{cateogary}</li>
                     })}                 
                 </ul>
             </section>

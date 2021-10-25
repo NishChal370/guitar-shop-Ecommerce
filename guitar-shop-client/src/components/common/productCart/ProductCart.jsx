@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import './ProductCart.css'
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import { useHistory } from 'react-router';
-import { GiShoppingBag, GiSelfLove } from 'react-icons/gi'
+import { GiSelfLove } from 'react-icons/gi'
 import { AiFillEdit } from "react-icons/ai";
 import { RiDeleteBin4Fill } from "react-icons/ri";
 import { MdOutlineShoppingBag, MdOutlineStarBorderPurple500 } from "react-icons/md";
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import { useSelector } from 'react-redux';
+
 import AddToCartButton from '../AddToCartButton';
 
 function ProductCart({product, calledFrom, categoryId}) {
     const history = useHistory();
-    const[isdeleted, setIsDeleted] = useState(false);
-    const cartState = useSelector(state => state.cartReducer.data);
-    // const [cartInfo, setCartInfo]= useState(cartState);
-    // let [productQunatityInCart, setProductQunatityInCart] = useState(0);
-    // let [userHaveCart, setUserHaveCart]= useState();
     let{name, price, imageOne, productQuantity, productId} = product;
 
-    // alert("CArt PRoID "+ productId);
     // for alert message using external libary
     const Toast = Swal.mixin({
         toast: true,
@@ -62,60 +56,9 @@ function ProductCart({product, calledFrom, categoryId}) {
                 });
             });
     }
-
-    const addToCartHandler=()=>{
-        // productQunatityInCart +=1;
-        // setProductQunatityInCart(productQunatityInCart);
-        let existingCartId = cartState[cartState.length-1].cartId;
-        // console.log(cartState);
-        // console.log("CartID ",cartState[cartState.length-1].cartId);
-        // console.log("productId", productId);
-        let cartData = {
-            product: {
-                productId: productId
-            },
-            quantity: 1
-        }
-
-        addProductInCart(existingCartId, cartData);
-        // console.log("<<<----Cart added");
-        // setProductQunatityInCart(productQunatityInCart);
-        // alert(productQunatityInCart);
-        // updateCartData();
-    }
-
-    const addProductInCart=(existingCartId, cartData)=>{
-        axios.patch(`http://localhost:3037/updateCartProductsById/${existingCartId}`,cartData)
-            .then((response) => {
-                // handle success
-                if(response.status.toString() === '200'){
-                    console.log("Cart addded", response);
-                    Toast.fire({
-                        icon: 'success',
-                        title: "Product added to Cart."
-                    });
-    
-                }
-            })
-            .catch(function (error) {
-                // handle error
-                console.log("Error -> from cart ",error);
-                alert("Cart existto update please click on overview");
-                Toast.fire({
-                    icon: 'error',
-                    title: "Product already added in cart. To update please click on overview"
-                });
-
-            });
-    }
-    
+ 
     useEffect(()=>{
-        console.log("Cartinfo from product cart>=");
-        console.log("from user have effect");
-        // console.log("-> ", userHaveCart);
-        console.log(cartState);
-        console.log("Cartinfo from product cart<=");
-    },[isdeleted]);
+    },[]);
 
     return (
         <div className="card">
@@ -135,7 +78,6 @@ function ProductCart({product, calledFrom, categoryId}) {
                             <p onClick={editProducthandler} ><AiFillEdit/></p>
                             <p onClick={deleteProduct}><RiDeleteBin4Fill/></p>
                         </span> 
-                        {/* <h5 className='card__overview overview--height'>Over view</h5> */}
                       </>
                     } 
                 </figcaption>
@@ -167,53 +109,3 @@ function ProductCart({product, calledFrom, categoryId}) {
 }
 
 export default ProductCart;
-{/* <p className="btn bg-dark text-white" onClick={addToCartHandler}> <GiShoppingBag/>&emsp;ADD TO CART </p> */}
-
- // const fetchCartData=()=>{
-    //     // Make a request for a user with a given ID
-    //     axios.get(`http://localhost:3037/cart`)
-    //         .then((response) => {
-    //             if(response.status.toString() === '200'){
-    //                 console.log("-----------------------");
-    //                 console.log(response.data);
-    //                 console.log(response.data.length);
-    //                 console.log(response.data.order);
-    //                 if(response.data.length === 0){
-    //                     console.log("LENGTH ZERO");
-    //                     setUserHaveCart(false);
-    //                 }
-    //                 else if(response.data[0].order === null){
-    //                     console.log("NULL CART");
-    //                     setUserHaveCart(true);
-    //                 }
-    //                 else if(response.data.order !== null){
-    //                     console.log("NOT NULLL");
-    //                     setUserHaveCart(false);
-    //                 }
-    //             }
-    //         })
-    //         .catch(function (error) {
-    //             // handle error
-    //             console.log("Error -> ",error);
-    //         });
-    // }
-
-
-    // useEffect(()=>{
-    //     fetchCartData();
-    // },[])
-
-    // const updateCartData=()=>{
-    //     // Make a request for a user with a given ID
-    //     axios.get(`http://localhost:3037/cart`)
-    //         .then((response) => {
-    //             if(response.status.toString() === '200'){
-    //             }
-    //         })
-    //         .catch(function (error) {
-    //             // handle error
-    //             console.log("Error -> ",error);
-    //         });
-    // }
-    
-    

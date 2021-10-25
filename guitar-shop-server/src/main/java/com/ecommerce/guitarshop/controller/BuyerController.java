@@ -26,20 +26,11 @@ public class BuyerController {
         return service.getById(id);
     }
 
-    //----
-//    @PostMapping("/saveBuyer")
-//    public ResponseEntity<Buyer> setBuyer(@RequestBody Buyer buyer){
-//        return new ResponseEntity<Buyer>(
-//                service.save(buyer), HttpStatus.CREATED);
-//    }
-    ///-------
-
-
     @PostMapping("/saveBuyer")
     public Object setBuyer(@Valid @RequestBody Buyer buyer){
         return service.registration(buyer);
     }
-//
+
     @GetMapping("/buyer/login")
     public Object loginCustomer(@RequestParam("buyerEmail") String buyerEmail,@RequestParam("buyerPassword") String buyerPassword){
         return service.validate(buyerEmail, buyerPassword);

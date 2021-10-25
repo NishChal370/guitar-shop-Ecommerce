@@ -1,13 +1,13 @@
 .products__conatiner{
-    margin: 2rem 10rem;
     display: flex;
+    margin: 2rem 10rem;
 }
 
 .overview__container{
-    padding: 12rem 1rem;
-    text-align: left;
-    display: flex;
     gap: 2rem;
+    display: flex;
+    text-align: left;
+    padding: 12rem 1rem;
 }
 
 .overview__container hr{
@@ -33,7 +33,6 @@
 
 .addCart__container{
     display: flex;
-
 }
 
 .addCart{
@@ -51,10 +50,9 @@
 }
 
 .love-progress__container span{
-    color: rgb(39, 38, 38);
-    font-size: 1.6rem;
-    /* background-color: green; */
     gap: 6rem;
+    font-size: 1.6rem;
+    color: rgb(39, 38, 38);
     border: 1px solid black;
     padding: 0.2rem 0.6rem;
 }

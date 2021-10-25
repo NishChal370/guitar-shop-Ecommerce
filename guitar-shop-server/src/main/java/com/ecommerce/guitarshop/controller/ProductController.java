@@ -27,32 +27,21 @@ public class ProductController {
 
     @GetMapping("/productById/{id}")
     private Product getById(@PathVariable Long id){
-        System.out.println("->>>> "+id);
+
         return service.getById(id);
     }
 
     @PostMapping("/saveProduct")
     public ResponseEntity<ProductGetDto> setProduct(String product, @RequestParam("file") MultipartFile file) throws IOException {
         ProductPostDto productPostDto = new ObjectMapper().readValue(product, ProductPostDto.class);
-        //        return new ResponseEntity<Product>(
-//                service.save(product), HttpStatus.CREATED);
 
-//        return service.save(productPostDto, file);
         return new ResponseEntity<ProductGetDto>(
                 service.save(productPostDto, file), HttpStatus.CREATED);
     }
 
-    //->> this is correct
-//    @PostMapping("/saveProduct")
-//    public ResponseEntity<Product> setProduct(@RequestBody Product product){
-//        return new ResponseEntity<Product>(
-//                service.save(product), HttpStatus.CREATED);
-//    }
-    //<<----
     @PostMapping("/saveProducts")
     public ResponseEntity<List<Product>> setProducts(@RequestBody List<Product> products){
-        System.out.println("frist");
-        System.out.println(products);
+
         return new ResponseEntity<List<Product>>(
                 service.saveAll(products), HttpStatus.CREATED);
     }
