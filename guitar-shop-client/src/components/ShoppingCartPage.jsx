@@ -10,9 +10,9 @@ import { setCart } from '../redux/Action';
 function ShoppingCartPage() {
     const dispatch = useDispatch();
     let [totalPrice, setTotalPrice] = useState(0);
+    const existingCartsData = useSelector(state => state.cartReducer.data);
     const [cartsState, setCartsState] = useState(existingCartsData);
     const [isCartProductDeleted, setIsCartProductDeleted] = useState(false);
-    const existingCartsData = useSelector(state => state.cartReducer.data);
     let presentingCartId = (existingCartsData !== undefined) && existingCartsData[existingCartsData.length-1].cartId;
     let cartProductList = (existingCartsData !== undefined) && existingCartsData[existingCartsData.length-1].cartProducts;
     
